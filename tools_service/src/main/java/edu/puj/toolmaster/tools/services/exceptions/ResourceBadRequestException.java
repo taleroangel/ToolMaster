@@ -1,2 +1,8 @@
-package edu.puj.toolmaster.tools.services.exceptions;public class ResourceBadRequestException {
+package edu.puj.toolmaster.tools.services.exceptions;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class ResourceBadRequestException extends RuntimeException{
 }

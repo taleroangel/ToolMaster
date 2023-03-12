@@ -2,16 +2,18 @@ package edu.puj.toolmaster.tools.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * A class that represents a city in which tools will be available
  */
 @Entity
 @Getter
-public class City {
+@ToString
+public class City extends DomainEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     private String name;

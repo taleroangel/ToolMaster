@@ -1,4 +1,6 @@
 package edu.puj.toolmaster.tools.entities;
 
-public abstract class Entity {
+import lombok.Builder;
+
+public abstract class DomainEntity {
 }

@@ -4,10 +4,8 @@ import edu.puj.toolmaster.tools.entities.DomainEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.swing.text.html.parser.Entity;
-
 @AllArgsConstructor
 @Getter
-public class EntityAlreadyExists extends RuntimeException {
+public class EntityAlreadyExistsException extends RuntimeException {
     DomainEntity resource;
 }

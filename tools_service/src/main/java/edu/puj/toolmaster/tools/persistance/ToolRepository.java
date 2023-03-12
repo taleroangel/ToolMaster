@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+/**
+ * Allows for database access achieving Dependency Inversion
+ */
 public interface ToolRepository extends JpaRepository<Tool, Integer> {
 }
