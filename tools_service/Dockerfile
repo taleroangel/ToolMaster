@@ -1,0 +1,10 @@
+FROM maven:3.9.0-amazoncorretto-17
+ARG TOOLMASTER_TOOLS_SERVICE_PORT
+
+WORKDIR /app
+COPY . .
+
+RUN mvn compile
+CMD mvn exec:java -Dexec.mainClass="edu.puj.toolmaster.tools.ToolsApplication"
+
+EXPOSE ${TOOLMASTER_TOOLS_SERVICE_PORT}

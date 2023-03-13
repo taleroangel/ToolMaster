@@ -1,0 +1,71 @@
+version: '3.9'
+
+services:
+  # MySQL database
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+      args:
+        MYSQL_TCP_PORT: ${MYSQL_TCP_PORT}
+
+    ports:
+      - ${MYSQL_TCP_PORT}:${MYSQL_TCP_PORT}
+    expose:
+      - ${MYSQL_TCP_PORT}
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      - MYSQL_TCP_PORT
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+    networks:
+      network:
+        ipv4_address: 10.0.0.10
+
+    healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            start_period: 10s
+            interval: 30s
+            timeout: 10s
+            retries: 10
+  
+  # Tools service
+  tools:
+    # Tools service depends on database
+    depends_on:
+      database:
+        condition: service_completed_successfully
+
+    build:
+      context: ./tools_service
+      dockerfile: ./Dockerfile
+      args:
+        TOOLMASTER_TOOLS_SERVICE_PORT: ${TOOLMASTER_TOOLS_SERVICE_PORT}
+
+    environment:
+      - TOOLMASTER_TOOLS_SERVICE_PORT
+      - TOOLMASTER_DATABASE_IP
+      - MYSQL_TCP_PORT
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+
+    ports:
+      - "${TOOLMASTER_TOOLS_SERVICE_PORT}:${TOOLMASTER_TOOLS_SERVICE_PORT}"
+    expose:
+      - '${TOOLMASTER_TOOLS_SERVICE_PORT}'
+
+    networks:
+      network:
+        ipv4_address: 10.0.0.20
+
+volumes:
+  mysql:
+
+networks:
+  network:
+    ipam:
+      driver: default
+      config:
+        - subnet: ${TOOLMASTER_NETWORK}

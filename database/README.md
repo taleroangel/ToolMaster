@@ -1,6 +1,12 @@
 # Database
 
-```bash
-docker build -t toolmaster_db . && \
-docker run -d -p 3306:3306 -v toolmaster_db_volume:/var/lib/mysql --name="toolmaster" toolmaster_db
-```
+## SQL Scripts
+- 00_init.sql
+- 01_tables.sql
+- 02_data.sql
+
+## Required Environment variables
+- MYSQL_TCP_PORT
+- MYSQL_USER
+- MYSQL_PASSWORD
+- MYSQL_ROOT_PASSWORD
