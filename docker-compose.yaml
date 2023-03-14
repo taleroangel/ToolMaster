@@ -31,7 +31,6 @@ services:
   
   # Tools service
   tools:
-    # Tools service depends on database
     depends_on:
       database:
         condition: service_completed_successfully
@@ -53,9 +52,8 @@ services:
     networks:
       - network
 
-  # Tools service
+  # Users service
   users:
-    # Users service depends on database
     depends_on:
       database:
         condition: service_completed_successfully
@@ -73,6 +71,29 @@ services:
       - "${TOOLMASTER_USERS_SERVICE_PORT}:${TOOLMASTER_USERS_SERVICE_PORT}"
     expose:
       - '${TOOLMASTER_USERS_SERVICE_PORT}'
+
+    networks:
+      - network
+  
+  # Authentication service
+  auth:
+    depends_on:
+      database:
+        condition: service_completed_successfully
+
+    build:
+      context: ./auth_service
+      dockerfile: ./Dockerfile
+      args:
+        TOOLMASTER_USERS_SERVICE_PORT: ${TOOLMASTER_AUTH_SERVICE_PORT}
+
+    env_file:
+      - .env
+
+    ports:
+      - "${TOOLMASTER_AUTH_SERVICE_PORT}:${TOOLMASTER_AUTH_SERVICE_PORT}"
+    expose:
+      - '${TOOLMASTER_AUTH_SERVICE_PORT}'
 
     networks:
       - network

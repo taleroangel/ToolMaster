@@ -2,6 +2,8 @@ package edu.puj.toolmaster.users.services;
 
 import edu.puj.toolmaster.users.entities.City;
 import edu.puj.toolmaster.users.entities.User;
+import edu.puj.toolmaster.users.entities.auth.Auth;
+import edu.puj.toolmaster.users.persistance.AuthRepository;
 import edu.puj.toolmaster.users.persistance.CityRepository;
 import edu.puj.toolmaster.users.persistance.UserRepository;
 import edu.puj.toolmaster.users.services.exceptions.EntityAlreadyExistsException;
@@ -26,6 +28,9 @@ public class UserService {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private AuthRepository authRepository;
 
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAllByActiveTrue(pageable);
@@ -61,6 +66,7 @@ public class UserService {
             }
 
             // Store it
+            authRepository.save(new Auth(fixedUser.getId(), fixedUser.getUsername(), fixedUser.getUsername()));
             return userRepository.save(fixedUser);
 
         } catch (EntityAlreadyExistsException e) {
@@ -75,6 +81,7 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         // Logical Delete
         user = user.withActive(Boolean.FALSE);
+        authRepository.deleteById(user.getId());
         userRepository.save(user);
     }
 
@@ -84,7 +91,10 @@ public class UserService {
             User findUser = userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
             // Parse the new user
             User parsedUser = parseUser(user);
-            // Save the changes
+            // Save the changes (Create auth if it was deactivated)
+            if (!findUser.getActive() && parsedUser.getActive()) {
+                authRepository.save(new Auth(findUser.getId(), parsedUser.getUsername(), parsedUser.getUsername()));
+            }
             return userRepository.save(parsedUser.withId(findUser.getId()));
         } catch (Exception e) {
             // Throws null pointer exception if brand or city could not be created
@@ -101,6 +111,9 @@ public class UserService {
             // Parse the new user
             if (user.getCity() != null) {
                 overrideUser = overrideUser.withCity(parseUserCity(overrideUser));
+            }
+            if (!findUser.getActive() && overrideUser.getActive()) {
+                authRepository.save(new Auth(findUser.getId(), overrideUser.getUsername(), overrideUser.getUsername()));
             }
             // Save the changes
             return userRepository.save(overrideUser);

@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
 
-/**
- * A class that represents a city in which tools will be available
- */
 @Entity
 @Getter
 @ToString

@@ -25,6 +25,10 @@ public class User extends DomainEntity {
     public City city;
     public Boolean active = Boolean.TRUE;
 
+    public String getUsername() {
+        return name.toLowerCase() + "_" + lastName.toLowerCase();
+    }
+
     public User overrideWith(User other) {
         var overridenUser = this;
 

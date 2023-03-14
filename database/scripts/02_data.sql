@@ -1,6 +1,5 @@
 USE toolmaster;
 SET NAMES 'utf8';
-
 -- Brands
 INSERT INTO brand (name)
 VALUES ('Stanley'),
@@ -31,6 +30,12 @@ VALUES (1002382383, 'John', 'Doe', '1990-01-01', 1, true),
 		3,
 		true
 	);
+-- Authentication
+INSERT INTO auth(user_id, username, password)
+VALUES (1002382383, 'john_doe', 'john_doe'),
+	(1192734759, 'jane_doe', 'jane_doe'),
+	(1002937466, 'bob_smith', 'bob_smith'),
+	(9218274590, 'alice_johnson', 'alice_johnson');
 -- Tools
 INSERT INTO tool (name, image, description, price, units, brand_id)
 VALUES (

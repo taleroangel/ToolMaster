@@ -1,15 +1,16 @@
 USE toolmaster;
 SET NAMES 'utf8';
-
 -- Create brands table
 CREATE TABLE brand (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(255)
+	name VARCHAR(255),
+	UNIQUE KEY unique_name_brand (name)
 );
 -- Create cities table
 CREATE TABLE city (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(255)
+	name VARCHAR(255),
+	UNIQUE KEY unique_name_city (name)
 );
 -- Create tools table
 CREATE TABLE tool (
@@ -38,4 +39,13 @@ CREATE TABLE user (
 	city_id INT,
 	active BOOLEAN DEFAULT TRUE,
 	FOREIGN KEY (city_id) REFERENCES city(id)
+);
+-- Create authentication table
+CREATE TABLE auth (
+	user_id BIGINT NOT NULL,
+	username VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	PRIMARY KEY (user_id),
+	UNIQUE KEY unique_username (username),
+	FOREIGN KEY (user_id) REFERENCES user(id)
 );
