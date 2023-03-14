@@ -85,7 +85,7 @@ services:
       context: ./auth_service
       dockerfile: ./Dockerfile
       args:
-        TOOLMASTER_USERS_SERVICE_PORT: ${TOOLMASTER_AUTH_SERVICE_PORT}
+        TOOLMASTER_AUTH_SERVICE_PORT: ${TOOLMASTER_AUTH_SERVICE_PORT}
 
     env_file:
       - .env
