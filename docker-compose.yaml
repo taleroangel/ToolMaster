@@ -15,14 +15,12 @@ services:
       - ${MYSQL_TCP_PORT}
     volumes:
       - mysql:/var/lib/mysql
-    environment:
-      - MYSQL_TCP_PORT
-      - MYSQL_USER
-      - MYSQL_PASSWORD
-      - MYSQL_ROOT_PASSWORD
+    env_file:
+      - .env
+
     networks:
       network:
-        ipv4_address: 10.0.0.10
+        ipv4_address: ${TOOLMASTER_DATABASE_IP}
 
     healthcheck:
             test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
@@ -44,12 +42,8 @@ services:
       args:
         TOOLMASTER_TOOLS_SERVICE_PORT: ${TOOLMASTER_TOOLS_SERVICE_PORT}
 
-    environment:
-      - TOOLMASTER_TOOLS_SERVICE_PORT
-      - TOOLMASTER_DATABASE_IP
-      - MYSQL_TCP_PORT
-      - MYSQL_USER
-      - MYSQL_PASSWORD
+    env_file:
+      - .env
 
     ports:
       - "${TOOLMASTER_TOOLS_SERVICE_PORT}:${TOOLMASTER_TOOLS_SERVICE_PORT}"
@@ -57,8 +51,31 @@ services:
       - '${TOOLMASTER_TOOLS_SERVICE_PORT}'
 
     networks:
-      network:
-        ipv4_address: 10.0.0.20
+      - network
+
+  # Tools service
+  users:
+    # Users service depends on database
+    depends_on:
+      database:
+        condition: service_completed_successfully
+
+    build:
+      context: ./users_service
+      dockerfile: ./Dockerfile
+      args:
+        TOOLMASTER_USERS_SERVICE_PORT: ${TOOLMASTER_USERS_SERVICE_PORT}
+
+    env_file:
+      - .env
+
+    ports:
+      - "${TOOLMASTER_USERS_SERVICE_PORT}:${TOOLMASTER_USERS_SERVICE_PORT}"
+    expose:
+      - '${TOOLMASTER_USERS_SERVICE_PORT}'
+
+    networks:
+      - network
 
 volumes:
   mysql:
