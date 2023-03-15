@@ -21,7 +21,7 @@ CREATE TABLE tool (
 	price DECIMAL(24, 12),
 	units INT DEFAULT 0,
 	brand_id INT,
-	FOREIGN KEY (brand_id) REFERENCES brand(id)
+	FOREIGN KEY (brand_id) REFERENCES brand(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Auxiliary table for tool to cities relationship
 CREATE TABLE tool_cities (

@@ -66,8 +66,9 @@ public class UserService {
             }
 
             // Store it
-            authRepository.save(new Auth(fixedUser.getId(), fixedUser.getUsername(), fixedUser.getUsername()));
-            return userRepository.save(fixedUser);
+            User ruser = userRepository.save(fixedUser);
+            authRepository.save(new Auth(ruser.getId(), ruser.getUsername(), ruser.getUsername()));
+            return ruser;
 
         } catch (EntityAlreadyExistsException e) {
             throw e;
@@ -92,10 +93,11 @@ public class UserService {
             // Parse the new user
             User parsedUser = parseUser(user);
             // Save the changes (Create auth if it was deactivated)
+            User ruser = userRepository.save(parsedUser.withId(findUser.getId()));
             if (!findUser.getActive() && parsedUser.getActive()) {
                 authRepository.save(new Auth(findUser.getId(), parsedUser.getUsername(), parsedUser.getUsername()));
             }
-            return userRepository.save(parsedUser.withId(findUser.getId()));
+            return ruser;
         } catch (Exception e) {
             // Throws null pointer exception if brand or city could not be created
             throw new ResourceBadRequestException();
@@ -112,11 +114,12 @@ public class UserService {
             if (user.getCity() != null) {
                 overrideUser = overrideUser.withCity(parseUserCity(overrideUser));
             }
+            User ruser = userRepository.save(overrideUser);
             if (!findUser.getActive() && overrideUser.getActive()) {
                 authRepository.save(new Auth(findUser.getId(), overrideUser.getUsername(), overrideUser.getUsername()));
             }
             // Save the changes
-            return userRepository.save(overrideUser);
+            return ruser;
         } catch (Exception e) {
             // Throws null pointer exception if brand or city could not be created
             throw new ResourceBadRequestException();

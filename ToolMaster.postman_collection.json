@@ -1,0 +1,488 @@
+{
+	"info": {
+		"_postman_id": "4f4206da-04d1-4215-90a4-c90084c3f89e",
+		"name": "ToolMaster",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21028492"
+	},
+	"item": [
+		{
+			"name": "Get all cities",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/cities/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"cities",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all brands",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/brands/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"brands",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all tools",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/tools/?size=2&page=0&sort=brand.name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"tools",
+						""
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "2",
+							"description": "Maximum number of elements to show"
+						},
+						{
+							"key": "page",
+							"value": "0",
+							"description": "Page number starting in 0"
+						},
+						{
+							"key": "sort",
+							"value": "brand.name",
+							"description": "Sorting criteria"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tool by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/tools/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"tools",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post new Tool",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Taladro Percutor\",\n    \"brand\": { \"name\": \"Bauker\" },\n    \"description\": \"Taladro atornillador 12V con 18 posiciones de torque más una de percusión. \",\n    \"image\": \"https://homecenterco.scene7.com/is/image/SodimacCO/484299_01?fmt=jpg&fit=fit,1&wid=420&hei=420\",\n    \"price\": 119900,\n    \"cities\": [\n        { \"name\": \"Bucaramanga\" }\n    ],\n    \"units\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/tools/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"tools",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete tool by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/tools/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"tools",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update tool by ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Taladro Percutor\",\n    \"brand\": { \"name\": \"Homecenter\" },\n    \"description\": \"Taladro atornillador 5V con 18 posiciones de torque más una de percusión. \",\n    \"image\": \"https://homecenterco.scene7.com/is/image/SodimacCO/484299_01?fmt=jpg&fit=fit,1&wid=420&hei=420\",\n    \"price\": 120000,\n    \"cities\": [\n        { \"name\": \"Bogotá\" }\n    ],\n    \"units\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/tools/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"tools",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partial update on tool by ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand\": { \"name\": \"Easy\" },\n    \"price\": 200000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/tools/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"tools",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users paginated",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/users/?size=2&page=1&sort=city",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "city"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/users/1192734759",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"users",
+						"1192734759"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 11,\r\n    \"name\": \"Angel\",\r\n    \"lastName\": \"Smith\",\r\n    \"birthDate\": \"1986-12-25T05:00:00.000+00:00\",\r\n    \"city\": {\r\n        \"name\": \"Bogotá\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/users/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"users",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user by ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Humberto\",\r\n    \"lastName\": \"Smith\",\r\n    \"birthDate\": \"1985-12-25T05:00:00.000+00:00\",\r\n    \"city\": {\r\n        \"id\": 2\r\n    \r\n    },\r\n    \"active\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/users/1002937466",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"users",
+						"1002937466"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partial user update by ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"name\": \"Bob\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/users/1002937466",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"users",
+						"1002937466"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Authentication Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"john_doe\",\n    \"password\": \"john_doe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Authentication",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/auth/check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"check"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huX2RvZSIsImlhdCI6MTY3ODkxODU1OSwiZXhwIjoxNjc5MDA0OTU5fQ.vM7B1hmHh9nLOUd5lMbu6NdmdvpWvUu9O91_gZ7foPeczQSHT87Edqpddi3rPT8sCJVS0l9FIPttWgZrZ5S1iQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -3,6 +3,7 @@ package edu.puj.toolmaster.tools.security.jwt;
 import edu.puj.toolmaster.tools.entities.auth.Auth;
 import edu.puj.toolmaster.tools.entities.auth.AuthDetails;
 import edu.puj.toolmaster.tools.services.AuthService;
+import edu.puj.toolmaster.tools.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +35,8 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             if (!hasAuthorizationBearer(request))
-                throw new Exception();
+                throw new Exception("Has no Bearer header");
+
             String authToken = getAccessToken(request);
             String username = jwt.validateToken(authToken);
 
@@ -46,7 +48,8 @@ public class JwtFilter extends OncePerRequestFilter {
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         } catch (Exception e) {
-            System.err.println("Failed JWT Authentication: " + e);
+            System.err.println("Failed JWT Authentication!");
+            e.printStackTrace();
         } finally {
             filterChain.doFilter(request, response);
         }
