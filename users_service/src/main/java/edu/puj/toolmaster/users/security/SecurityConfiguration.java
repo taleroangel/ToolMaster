@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                         response.sendError(HttpStatus.UNAUTHORIZED.value());
                     }
                 });
-        ;
+        
         // Disable CSRF
         http.csrf().disable();
         // Do not create session cookies
