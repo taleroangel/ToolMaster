@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent {
     password: new FormControl()
   })
 
-  constructor(private loginService: LoginService, public router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   onSubmit(): void {
     // Obtener los parámetros
@@ -29,11 +29,11 @@ export class LoginComponent {
     }
 
     // Hacer la petición
-    this.loginService.login(userParam, passParam).subscribe(
+    this.authService.login(userParam, passParam).subscribe(
       {
         next: data => {
-          this.loginService.setToken(data.token)
-          this.router.navigateByUrl('/tools')
+          this.authService.setToken(data.token)
+          this.router.navigateByUrl('/home')
         },
         error: error => {
           console.error(error);
@@ -46,7 +46,9 @@ export class LoginComponent {
     this.checkoutForm.reset()
   }
 
-  showAuthentication() {
-    alert(`Estado del token: ${this.loginService.hasToken() ? 'PRESENTE' : 'FALTA TOKEN'}`);
+  logOut() {
+    this.authService.logout()
+    alert("Sesión cerrada correctamente")
+    this.router.navigateByUrl('/home')
   }
 }

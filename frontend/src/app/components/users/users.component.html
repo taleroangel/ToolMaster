@@ -1,1 +1,52 @@
-<p>users works!</p>
+<ng-component *ngIf="!checkAuthenticated(); then not_authenticated; else content">
+</ng-component>
+
+<ng-template #content>
+  <ng-component *ngIf="isReady; then content; else loading">
+  </ng-component>
+</ng-template>
+
+<ng-template #not_authenticated>
+  <div class="d-flex align-items-center justify-content-center m-5">
+    <div class="card mb-3" style="max-width: 18rem;">
+      <div class="card-header text-bg-danger">Fallo de Autenticación</div>
+      <div class="card-body">
+        <h5 class="card-title text-danger">No estás autenticado</h5>
+        <p class="card-text">Por favor inicia sesión para continuar...</p>
+        <a class="btn btn-outline-danger" href="/login">Iniciar Sesión</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="loading">
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #ready>
+  <div class="d-flex align-items-center justify-content-center">
+    <!-- Filtros -->
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Filtrar Por
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" [class.active]="currentSort == US.NONE" (click)="sortBy(US.NONE)">No Filtrar</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Paginación -->
+    <nav class="mt-3 ms-3">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" [class.disabled-link]="pagination.first"
+            (click)="goPreviousPage()">Anterior</a></li>
+        <li class="page-item"><b class="page-link">{{pagination.number}}</b></li>
+        <li class=" page-item"><a class="page-link" [class.disabled-link]="pagination.last"
+            (click)="goNextPage()">Siguiente</a></li>
+      </ul>
+    </nav>
+  </div>
+</ng-template>

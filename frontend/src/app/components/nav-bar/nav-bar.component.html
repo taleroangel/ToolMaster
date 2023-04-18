@@ -18,7 +18,7 @@
         </li>
       </ul>
       <a href="/login" class="btn btn-primary" role="button">
-        Iniciar Sesión
+        {{authService.isAuthenticated() ? 'Cerrar Sesión': 'Iniciar Sesión'}}
       </a>
     </div>
   </div>

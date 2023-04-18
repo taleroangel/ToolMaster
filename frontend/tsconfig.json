@@ -1,5 +1,13 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "paths": {
+    "@/*": [
+      "./*",
+      "app/*",
+      "src/app/*",
+      "../node_modules/*"
+    ]
+  },
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",

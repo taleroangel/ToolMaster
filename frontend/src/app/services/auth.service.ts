@@ -6,8 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-
+export class AuthService {
   constructor(
     private http: HttpClient,
     private cookies: CookieService
@@ -20,6 +19,10 @@ export class LoginService {
     })
   }
 
+  logout() {
+    this.cookies.delete('token')
+  }
+
   setToken(token: string) {
     this.cookies.set('token', token)
   }
@@ -28,7 +31,7 @@ export class LoginService {
     return this.cookies.get('token')
   }
 
-  hasToken(): boolean {
+  isAuthenticated(): boolean {
     return this.getToken().length != 0
   }
 }
