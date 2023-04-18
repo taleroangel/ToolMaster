@@ -29,12 +29,12 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+            ],
             "styles": [
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css"
-            ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js"
             ]
           },
           "configurations": {

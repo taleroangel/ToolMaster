@@ -1,0 +1,25 @@
+.loading {
+  width: 100%;
+  padding: 5em;
+  text-align: center;
+  margin: auto auto;
+}
+
+.tools-section {
+  margin: 20px;
+}
+
+.tools-grid {
+  padding: 20px;
+}
+
+.tool-card {
+  img {
+    margin: 20px;
+    width: 90%;
+  }
+}
+
+.disabled-link {
+  color: grey;
+}
