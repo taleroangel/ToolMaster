@@ -1,11 +1,12 @@
 version: '3.3'
 
 services:
+
   # MySQL database
   database:
     build:
       context: ./database
-      dockerfile: Dockerfile
+      dockerfile: Containerfile
       args:
         MYSQL_TCP_PORT: ${MYSQL_TCP_PORT}
 
@@ -30,15 +31,15 @@ services:
   
   # Tools service
   tools:
+    build:
+      context: ./tools_service
+      dockerfile: ./Containerfile
+      args:
+        TOOLMASTER_TOOLS_SERVICE_PORT: ${TOOLMASTER_TOOLS_SERVICE_PORT}
+
     depends_on:
       database:
         condition: service_healthy
-
-    build:
-      context: ./tools_service
-      dockerfile: ./Dockerfile
-      args:
-        TOOLMASTER_TOOLS_SERVICE_PORT: ${TOOLMASTER_TOOLS_SERVICE_PORT}
 
     env_file:
       - .env
@@ -53,15 +54,15 @@ services:
 
   # Users service
   users:
+    build:
+      context: ./users_service
+      dockerfile: ./Containerfile
+      args:
+        TOOLMASTER_USERS_SERVICE_PORT: ${TOOLMASTER_USERS_SERVICE_PORT}
+
     depends_on:
       database:
         condition: service_healthy
-
-    build:
-      context: ./users_service
-      dockerfile: ./Dockerfile
-      args:
-        TOOLMASTER_USERS_SERVICE_PORT: ${TOOLMASTER_USERS_SERVICE_PORT}
 
     env_file:
       - .env
@@ -76,15 +77,15 @@ services:
   
   # Authentication service
   auth:
+    build:
+      context: ./auth_service
+      dockerfile: ./Containerfile
+      args:
+        TOOLMASTER_AUTH_SERVICE_PORT: ${TOOLMASTER_AUTH_SERVICE_PORT}
+
     depends_on:
       database:
         condition: service_healthy
-
-    build:
-      context: ./auth_service
-      dockerfile: ./Dockerfile
-      args:
-        TOOLMASTER_AUTH_SERVICE_PORT: ${TOOLMASTER_AUTH_SERVICE_PORT}
 
     env_file:
       - .env

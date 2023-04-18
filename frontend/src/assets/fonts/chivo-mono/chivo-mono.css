@@ -1,0 +1,8 @@
+/* chivo-mono-medium */
+@font-face {
+	font-family: Chivo Mono;
+	font-style: normal;
+	font-weight: 500;
+	src: local("Chivo Mono Medium"), local("ChivoMono-Medium"), url(chivo-mono-medium.woff2) format("woff2");
+}
+

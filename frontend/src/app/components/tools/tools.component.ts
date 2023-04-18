@@ -16,21 +16,46 @@ export class ToolsComponent implements OnInit {
   public pagination!: Pageable<Tool>;
   public tools!: Tool[];
 
+  public currentPage: number = 0;
+  public currentSort: ToolSort = ToolSort.NONE;
+
   constructor(private toolService: ToolService) {
   }
 
   ngOnInit(): void {
-    this.toolService.searchAllTools().subscribe(data => {
-      this.pagination = data;
-      this.tools = data.content;
-      this.isReady = true;
+    this.fetchContent()
+  }
+
+  fetchContent(): void {
+    this.toolService.searchAllTools(this.currentSort, this.currentPage).subscribe({
+      next: data => {
+        this.pagination = data;
+        this.tools = data.content;
+        this.isReady = true;
+      },
+      error: error => {
+        console.error(error);
+        alert("Error!, No se ha podido conectar con el servidor")
+      }
     })
   }
 
-  sortBy(sort: ToolSort): void {
-    this.toolService.searchAllTools(sort).subscribe(data => {
-      this.pagination = data;
-      this.tools = data.content;
-    })
+  sortBy(sort: ToolSort) {
+    this.currentSort = sort;
+    this.fetchContent()
+  }
+
+  goNextPage() {
+    if (!this.pagination.last) {
+      this.currentPage += 1
+      this.fetchContent()
+    }
+  }
+
+  goPreviousPage() {
+    if (!this.pagination.first) {
+      this.currentPage -= 1
+      this.fetchContent()
+    }
   }
 }

@@ -27,4 +27,8 @@ export class LoginService {
   getToken() {
     return this.cookies.get('token')
   }
+
+  hasToken(): boolean {
+    return this.getToken().length != 0
+  }
 }

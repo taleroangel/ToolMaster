@@ -30,17 +30,23 @@ export class LoginComponent {
 
     // Hacer la petición
     this.loginService.login(userParam, passParam).subscribe(
-      data => {
-        this.loginService.setToken(data.token)
-        this.router.navigateByUrl('/tools')
-      },
-      error => {
-        console.error(error);
-        alert("Error!, usuario o contraseña son incorrectos")
+      {
+        next: data => {
+          this.loginService.setToken(data.token)
+          this.router.navigateByUrl('/tools')
+        },
+        error: error => {
+          console.error(error);
+          alert("Error!, usuario o contraseña son incorrectos")
+        }
       }
     )
 
     // Reiniciar el form
     this.checkoutForm.reset()
+  }
+
+  showAuthentication() {
+    alert(`Estado del token: ${this.loginService.hasToken() ? 'PRESENTE' : 'FALTA TOKEN'}`);
   }
 }

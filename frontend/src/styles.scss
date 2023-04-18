@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("assets/fonts/chivo-mono/chivo-mono.css");
+
+.loading {
+  width: 100%;
+  padding: 5em;
+  text-align: center;
+  margin: auto auto;
+}
+
+.title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-family: "Chivo Mono", monospace;
+}

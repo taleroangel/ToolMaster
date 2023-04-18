@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
  */
 @RestController
 @RequestMapping("/api/tools")
+@CrossOrigin(origins="http://localhost:4200")
 public class ToolsController {
     @Autowired
     ToolService service;
