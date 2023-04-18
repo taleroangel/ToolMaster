@@ -14,7 +14,7 @@ export class UserService {
 
   searchAllUsers(sort: UserSort, page: number = 0): Observable<Pageable<User>> {
     const params = new HttpParams().set('sort', sort).set('page', page);
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
     return this.http.get<Pageable<User>>("http://localhost:8082/api/users/", { params: params, headers: headers })
   }
 }

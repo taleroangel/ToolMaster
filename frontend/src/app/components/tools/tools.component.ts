@@ -19,11 +19,30 @@ export class ToolsComponent implements OnInit {
   public currentPage: number = 0;
   public currentSort: ToolSort = ToolSort.NONE;
 
+  public searchName: string = "";
+
   constructor(private toolService: ToolService) {
   }
 
   ngOnInit(): void {
     this.fetchContent()
+  }
+
+  searchByName(): void {
+    if (this.searchName.length == 0)
+      return this.fetchContent()
+
+    this.toolService.searchByName(this.searchName, this.currentSort, this.currentPage).subscribe({
+      next: data => {
+        this.pagination = data;
+        this.tools = data.content;
+        this.isReady = true;
+      },
+      error: error => {
+        console.error(error);
+        alert("Error!, No se ha podido conectar con el servidor")
+      }
+    })
   }
 
   fetchContent(): void {

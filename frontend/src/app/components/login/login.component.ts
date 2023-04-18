@@ -29,18 +29,11 @@ export class LoginComponent {
     }
 
     // Hacer la petición
-    this.authService.login(userParam, passParam).subscribe(
-      {
-        next: data => {
-          this.authService.setToken(data.token)
-          this.router.navigateByUrl('/home')
-        },
-        error: error => {
-          console.error(error);
-          alert("Error!, usuario o contraseña son incorrectos")
-        }
-      }
-    )
+    this.authService.login(userParam, passParam, () => {
+      this.router.navigateByUrl('/home')
+    }, () => {
+      alert("Error!, usuario o contraseña son incorrectos")
+    })
 
     // Reiniciar el form
     this.checkoutForm.reset()

@@ -21,11 +21,13 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.fetchContent()
+    // Fetch content only if authenticated
+    if (this.userService.authService.authenticated)
+      this.fetchContent()
   }
 
   checkAuthenticated(): boolean {
-    return this.userService.authService.isAuthenticated()
+    return this.userService.authService.authenticated
   }
 
   fetchContent(): void {

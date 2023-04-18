@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center gap-3 my-5">
-  <ng-component *ngIf="authService.isAuthenticated(); then logout; else login_form"></ng-component>
+  <ng-component *ngIf="authService.authenticated; then logout; else login_form"></ng-component>
 </div>
 
 <ng-template #logout>

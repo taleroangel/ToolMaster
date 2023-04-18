@@ -12,3 +12,34 @@
   margin-bottom: 20px;
   font-family: "Chivo Mono", monospace;
 }
+
+.header {
+  position: relative;
+  background-color: black;
+  min-height: fit-content;
+
+  .content {
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1em;
+    margin: 1em;
+    max-width: 65%;
+  }
+
+  .offset {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 1em;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 45%;
+  }
+}
