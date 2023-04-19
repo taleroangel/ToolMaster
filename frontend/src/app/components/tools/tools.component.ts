@@ -4,8 +4,11 @@ import { Pageable } from 'src/app/interfaces/pageable';
 import { Tool } from 'src/app/models/tool';
 import { AuthService } from 'src/app/services/auth.service';
 import { Brand } from 'src/app/models/brand';
-import { BrandService } from 'src/app/brand.service';
+import { BrandService } from 'src/app/services/brand.service';
 
+/**
+ * Componente que muestra las cards con las diferentes herramientas
+ */
 @Component({
   selector: 'app-tools',
   templateUrl: './tools.component.html',
@@ -13,30 +16,85 @@ import { BrandService } from 'src/app/brand.service';
 })
 export class ToolsComponent implements OnInit {
 
-  public TS = ToolSort;
-  public isReady = false;
+  /**
+   * Alias a ToolSort para uso dentro del html
+   */
+  TS = ToolSort;
 
-  public pagination!: Pageable<Tool>;
-  public tools!: Tool[];
-  public brands!: Brand[];
+  /**
+   * Variable que indica si está listo el contenido de la página
+   */
+  isReady = false;
 
-  public currentPage: number = 0;
-  public currentSort: ToolSort = ToolSort.NONE;
+  /**
+   * Información sobre la paginación de herramientas para mostrar la página actual
+   */
+  pagination!: Pageable<Tool>;
 
-  public searchName: string = "";
-  public brandFilter: string = "";
+  /**
+   * Listado de las herramientas a mostrar
+   */
+  tools!: Tool[];
 
+  /**
+   * Listado de las marcas para el filtro de marca
+   */
+  brands: Brand[] = [];
+
+  /**
+   * Página actual para mostrar en la paginación
+   */
+  currentPage: number = 0;
+
+  /**
+  * Criterio de ordenamiento actual
+  */
+  currentSort: ToolSort = ToolSort.NONE;
+
+  /**
+  * Variable para almacenar el nombre de la herramienta buscar,
+  * está adjunta mediante un [ngModel] al input de búsqueda
+  */
+  searchName: string = "";
+
+  /**
+   * Variable para almacenar el filtro de marca actual,
+   * si está vacío no se aplica filtro
+   */
+  brandFilter: string = "";
+
+  /**
+   * Constructor con los servicios inyectados
+   * @param toolService Servicio de Herramientas
+   * @param brandService Servicio de marcas
+   * @param authService Servicio de autenticación
+   */
   constructor(
     private toolService: ToolService,
-    public authService: AuthService,
-    private brandService: BrandService) {
+    private brandService: BrandService,
+    private authService: AuthService,
+  ) {
   }
 
+  /**
+   * Cargar contenido una vez se inicie la página
+   */
   ngOnInit(): void {
     this.fetchTools()
     this.fetchBrands()
   }
 
+  /**
+   * Verificar si se está autenticado
+   * @returns True si está autenticado
+   */
+  get authenticated(): boolean {
+    return this.authService.authenticated
+  }
+
+  /**
+   * Obtener las herramientas utilizando las variables de ordenamiento y paginado
+   */
   fetchTools(): void {
     this.toolService.searchAllTools(this.currentSort, this.currentPage).subscribe({
       next: data => {
@@ -51,6 +109,9 @@ export class ToolsComponent implements OnInit {
     })
   }
 
+  /**
+   * Obtener un listado de todas las marcas
+   */
   fetchBrands(): void {
     this.brandService.fetchBrands().subscribe({
       next: data => {
@@ -63,6 +124,9 @@ export class ToolsComponent implements OnInit {
     })
   }
 
+  /**
+   * Obtener las herramientas cuyo nombre coincida o incluya el especificado
+   */
   searchByName(): void {
     if (this.searchName.length == 0)
       return this.fetchTools()
@@ -80,6 +144,10 @@ export class ToolsComponent implements OnInit {
     })
   }
 
+  /**
+   * Buscar las herramientas cuya marca coincida o incluya la especificada
+   * @param brand Marca por la cual filtrar=
+   */
   searchByBrand(brand: string): void {
     this.brandFilter = brand
 
@@ -90,7 +158,6 @@ export class ToolsComponent implements OnInit {
       next: data => {
         this.pagination = data;
         this.tools = data.content;
-        this.isReady = true;
       },
       error: error => {
         console.error(error);
@@ -99,19 +166,29 @@ export class ToolsComponent implements OnInit {
     })
   }
 
-  sortBy(sort: ToolSort) {
+  /**
+   * Cambiar el criterio de ordenamiento y realizar una nueva petición
+   * @param sort Criterio de ordenamiento
+   */
+  sortBy(sort: ToolSort): void {
     this.currentSort = sort;
     this.fetchTools()
   }
 
-  goNextPage() {
+  /**
+   * Cambiar la paginación a la siguiente página
+   */
+  goNextPage(): void {
     if (!this.pagination.last) {
       this.currentPage += 1
       this.fetchTools()
     }
   }
 
-  goPreviousPage() {
+  /**
+   * Cambiar la paginación a la página anterior
+   */
+  goPreviousPage(): void {
     if (!this.pagination.first) {
       this.currentPage -= 1
       this.fetchTools()

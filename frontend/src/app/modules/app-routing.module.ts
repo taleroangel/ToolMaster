@@ -6,6 +6,9 @@ import { LoginComponent } from '../components/login/login.component';
 import { ToolsComponent } from '../components/tools/tools.component';
 import { UsersComponent } from '../components/users/users.component';
 
+/**
+ * Rutas de la SPA administradas por el Router
+ */
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: WelcomeComponent },

@@ -1,4 +1,4 @@
-<ng-component *ngIf="!checkAuthenticated(); then not_authenticated; else content">
+<ng-component *ngIf="!authenticated; then not_authenticated; else content">
 </ng-component>
 
 <ng-template #content>

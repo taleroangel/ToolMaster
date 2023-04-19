@@ -1,3 +1,6 @@
+/**
+ * Interfaz mediante la cual se representan las respuestas paginadas del servidor
+ */
 export interface Pageable<T> {
   content: T[]
   pageable: {
