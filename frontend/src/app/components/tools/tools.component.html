@@ -14,16 +14,33 @@
     <div class="content">
       <h1 class="title">Listado de Herramientas</h1>
     </div>
+    <div class="offset" *ngIf="authService.authenticated">
+      <a href="#" class="btn btn-primary">
+        Insertar Nueva Herramienta
+      </a>
+    </div>
   </div>
 
   <div class="d-flex align-items-center justify-content-center gap-3">
+    <!-- Marcas -->
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{brandFilter.length == 0 ? 'Seleccionar Marca': brandFilter}}
+      </button>
+      <ul class="dropdown-menu">
+        <li><button (click)="searchByBrand('')" class="dropdown-item" [class.active]="brandFilter.length == 0">Todas las
+            marcas</button></li>
+        <li><button (click)="searchByBrand(brand.name)" class="dropdown-item" *ngFor="let brand of brands"
+            [class.active]="brandFilter == brand.name">{{brand.name}}</button></li>
+      </ul>
+    </div>
     <!-- Filtros -->
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Filtrar Por
+        Ordenar Por
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" [class.active]="currentSort == TS.NONE" (click)="sortBy(TS.NONE)">No Filtrar</a>
+        <li><a class="dropdown-item" [class.active]="currentSort == TS.NONE" (click)="sortBy(TS.NONE)">No Ordenar</a>
         </li>
         <li><a class="dropdown-item" [class.active]="currentSort == TS.PRICE" (click)="sortBy(TS.PRICE)">Precio</a></li>
         <li><a class="dropdown-item" [class.active]="currentSort == TS.NAME" (click)="sortBy(TS.NAME)">Nombre</a></li>
@@ -49,8 +66,12 @@
     </form>
   </div>
 
+  <div *ngIf="tools.length == 0">
+    <h3 class="text-center">No hay resultados que coincidan con el criterio...</h3>
+  </div>
+
   <!-- Mostrar Herramientas -->
-  <section class="tools-section h-100">
+  <section class="tools-section h-100" *ngIf="tools.length != 0">
     <div class="tools-grid row">
       <div class="col-sm-3" *ngFor="let tool of tools">
         <div class="card text-black tool-card">
@@ -60,20 +81,31 @@
               <h5 class="card-title">{{tool.name}}</h5>
               <p class="text-muted mb-4">{{tool.description}}</p>
             </div>
-            <div>
-              <div class="d-flex justify-content-between">
-                <span>Marca</span><b>{{tool.brand.name}}</b>
-              </div>
-              <div class="d-flex justify-content-between">
-                <span>Ciudades Disponibles</span>
-                <ul>
-                  <li *ngFor="let city of tool.cities">{{city.name}}</li>
-                </ul>
-              </div>
-            </div>
-            <b class="units">{{tool.units}} Unidades Disponibles</b>
-            <div class="d-flex justify-content-between font-weight-bold">
-              <span>Precio</span><span>${{tool.price}}</span>
+            <table class="table table-bordered">
+              <tr>
+                <th>Marca</th>
+                <td>{{tool.brand.name}}</td>
+              </tr>
+              <tr>
+                <th>Unidades:</th>
+                <td>{{tool.units}}</td>
+              </tr>
+              <tr>
+                <th>Ciudades:</th>
+                <td>
+                  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let city of tool.cities">{{city.name}}</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th>Precio:</th>
+                <td>${{tool.price}}</td>
+              </tr>
+            </table>
+            <div class="d-flex align-items-center justify-content-center gap-3">
+              <a href="#" class="btn btn-primary">Detalles</a>
+              <a href="#" class="btn btn-danger" *ngIf="authService.authenticated"><i class="bi bi-trash-fill"></i></a>
             </div>
           </div>
         </div>

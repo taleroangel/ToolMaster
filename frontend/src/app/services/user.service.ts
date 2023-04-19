@@ -17,6 +17,17 @@ export class UserService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
     return this.http.get<Pageable<User>>("http://localhost:8082/api/users/", { params: params, headers: headers })
   }
+
+  searchByName(name: string, sort: UserSort = UserSort.NONE, page: number = 0): Observable<Pageable<User>> {
+    const params = new HttpParams().set('sort', sort).set('page', page);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
+    return this.http.get<Pageable<User>>(`http://localhost:8082/api/users/search/${name}`, { params: params, headers: headers })
+  }
+
+  deleteById(id: number) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
+    return this.http.delete<Pageable<User>>(`http://localhost:8082/api/users/${id}`, { headers: headers })
+  }
 }
 
 export enum UserSort {
@@ -25,6 +36,5 @@ export enum UserSort {
   NAME = 'name',
   LASTNAME = 'lastName',
   BIRTHDATE = 'birthDate',
-  CITY = 'city.name',
-  USERNAME = 'username'
+  CITY = 'city.name'
 }

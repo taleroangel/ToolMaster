@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pageable } from 'src/app/interfaces/pageable';
-import { User } from 'src/app/models/user';
 import { UserService, UserSort } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-users',
@@ -17,6 +17,7 @@ export class UsersComponent implements OnInit {
 
   public currentPage: number = 0;
   public currentSort: UserSort = UserSort.NONE;
+  public searchName: string = "";
 
   constructor(private userService: UserService) { }
 
@@ -36,6 +37,36 @@ export class UsersComponent implements OnInit {
         this.pagination = data;
         this.users = data.content;
         this.isReady = true;
+      },
+      error: error => {
+        console.error(error);
+        alert("Error!, No se ha podido conectar con el servidor")
+      }
+    })
+  }
+
+  searchByName(): void {
+    if (this.searchName.length == 0)
+      return this.fetchContent()
+
+    this.userService.searchByName(this.searchName, this.currentSort, this.currentPage).subscribe({
+      next: data => {
+        this.pagination = data;
+        this.users = data.content;
+        this.isReady = true;
+      },
+      error: error => {
+        console.error(error);
+        alert("Error!, No se ha podido conectar con el servidor")
+      }
+    })
+  }
+
+  deleteUser(id: number) {
+    this.userService.deleteById(id).subscribe({
+      next: _ => {
+        alert("Eliminado correctamente!")
+        this.fetchContent()
       },
       error: error => {
         console.error(error);

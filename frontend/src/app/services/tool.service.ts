@@ -20,6 +20,11 @@ export class ToolService {
     const params = new HttpParams().set('sort', sort).set('page', page);
     return this.http.get<Pageable<Tool>>(`http://localhost:8081/api/tools/search/name/${name}`, { params: params })
   }
+
+  searchByBrand(brand: string, sort: ToolSort = ToolSort.NONE, page: number = 0): Observable<Pageable<Tool>> {
+    const params = new HttpParams().set('sort', sort).set('page', page);
+    return this.http.get<Pageable<Tool>>(`http://localhost:8081/api/tools/search/brand/${brand}`, { params: params })
+  }
 }
 
 export enum ToolSort {
