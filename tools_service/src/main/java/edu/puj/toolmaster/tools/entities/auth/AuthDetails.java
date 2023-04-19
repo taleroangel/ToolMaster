@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * Clase para uso interno de Spring que controla el modelo de autenticación
+ */
 @AllArgsConstructor
 public class AuthDetails implements UserDetails {
     @NonNull

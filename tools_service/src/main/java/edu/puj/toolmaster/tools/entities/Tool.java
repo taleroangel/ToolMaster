@@ -1,6 +1,7 @@
 package edu.puj.toolmaster.tools.entities;
 
 import jakarta.persistence.*;
+import jakarta.persistence.metamodel.StaticMetamodel;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @With
 @ToString
+@StaticMetamodel(Tool.class)
 public class Tool extends DomainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

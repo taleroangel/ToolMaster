@@ -1,6 +1,7 @@
 package edu.puj.toolmaster.tools.entities;
 
-import lombok.Builder;
-
+/**
+ * Entidad perteneciente al dominio de negocio
+ */
 public abstract class DomainEntity {
 }

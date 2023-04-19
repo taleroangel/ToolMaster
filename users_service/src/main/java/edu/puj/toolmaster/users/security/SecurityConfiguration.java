@@ -10,8 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 @Configuration
@@ -23,27 +25,22 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
-                        e -> e.anyRequest().authenticated()
-                ).addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
-
-                    var stack = Arrays.stream(authException.getStackTrace())
-                                        .map(StackTraceElement::getFileName)
-                                        .filter(Objects::nonNull)
-                                        .filter(e -> e.equals("JwtFilter.java")).toList();
-
-                    if (stack.isEmpty()) {
-                        response.sendError(response.getStatus());
-                    } else {
-                        response.sendError(HttpStatus.UNAUTHORIZED.value());
-                    }
-                });
-        
         // Disable CSRF
         http.csrf().disable();
+        // Cors Setup
+        http.cors().configurationSource(
+                request -> {
+                    var cors = new CorsConfiguration();
+                    cors.setAllowedMethods(List.of(new String[]{"GET", "POST", "PUT", "DELETE", "PATCH"}));
+                    return cors.applyPermitDefaultValues();
+                }
+        );
         // Do not create session cookies
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // Add filters
+        http.authorizeHttpRequests(
+                e -> e.anyRequest().authenticated().shouldFilterAllDispatcherTypes(false)
+        ).addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

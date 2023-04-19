@@ -1,18 +1,18 @@
 package edu.puj.toolmaster.tools.services;
 
-import edu.puj.toolmaster.tools.entities.Brand;
-import edu.puj.toolmaster.tools.entities.City;
-import edu.puj.toolmaster.tools.entities.Tool;
+import edu.puj.toolmaster.tools.entities.*;
 import edu.puj.toolmaster.tools.persistance.BrandRepository;
 import edu.puj.toolmaster.tools.persistance.CityRepository;
 import edu.puj.toolmaster.tools.persistance.ToolRepository;
 import edu.puj.toolmaster.tools.services.exceptions.EntityAlreadyExistsException;
 import edu.puj.toolmaster.tools.services.exceptions.ResourceBadRequestException;
 import edu.puj.toolmaster.tools.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.criteria.*;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +41,33 @@ public class ToolService {
     public Page<Tool> getAllTools(Pageable pageable) {
         return toolRepository.findAll(pageable);
     }
+
+    /**
+     * Obtener las herramientas cuyo nombre coincida o contenga el especificado
+     * @param name Nombre de la herramientas
+     * @param pageable Criterio de paginación
+     * @return Herramientas paginadas
+     */
+    public Page<Tool> toolByNameLike(String name, Pageable pageable) {
+        String matchName = "%" + name + "%";
+        Specification<Tool> spec = Specification.where((root, query, cb) -> cb.like(root.get(Tool_.name), matchName));
+        return toolRepository.findAll(spec, pageable);
+    }
+
+    /**
+     * Obtener las herramientas que tengan una marca cuyo nombre coincida o contenga el especificado
+     * @param brand Nombre de la marca
+     * @param pageable Criterio de paginación
+     * @return Herramientas paginadas
+     */
+    public Page<Tool> toolByBrand(String brand, Pageable pageable) {
+        Specification<Tool> spec = Specification.where((root, query, cb) -> {
+            Join<Tool, Brand> brandJoin = root.join(Tool_.brand, JoinType.LEFT);
+            return cb.like(brandJoin.get(Brand_.name), brand);
+        });
+        return toolRepository.findAll(spec, pageable);
+    }
+
 
     /**
      * Get a tool by its id

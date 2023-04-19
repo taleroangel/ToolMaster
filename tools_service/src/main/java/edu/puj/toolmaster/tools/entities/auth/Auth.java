@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.With;
 
+/**
+ * Clase que representa el modelo de autenticación en la base de datos
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

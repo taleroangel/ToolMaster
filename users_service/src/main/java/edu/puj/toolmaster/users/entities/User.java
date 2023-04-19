@@ -3,6 +3,7 @@ package edu.puj.toolmaster.users.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.metamodel.StaticMetamodel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @With
+@StaticMetamodel(User.class)
 public class User extends DomainEntity {
     @Id
     public Long id;

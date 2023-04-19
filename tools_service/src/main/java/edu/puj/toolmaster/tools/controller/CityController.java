@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controlador REST para las ciudades
+ */
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/api/cities")
@@ -19,6 +22,10 @@ public class CityController {
     @Autowired
     private CityService service;
 
+    /**
+     * Obtener todas las ciudades
+     * @return Listado de ciudades sin paginar
+     */
     @GetMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<City> getAllCities() {
         return service.getAllCities();

@@ -2,6 +2,7 @@ package edu.puj.toolmaster.tools.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.persistence.metamodel.StaticMetamodel;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -11,6 +12,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @ToString
+@StaticMetamodel(Brand.class)
 public class Brand extends DomainEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

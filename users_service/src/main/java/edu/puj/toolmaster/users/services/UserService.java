@@ -2,6 +2,7 @@ package edu.puj.toolmaster.users.services;
 
 import edu.puj.toolmaster.users.entities.City;
 import edu.puj.toolmaster.users.entities.User;
+import edu.puj.toolmaster.users.entities.User_;
 import edu.puj.toolmaster.users.entities.auth.Auth;
 import edu.puj.toolmaster.users.persistance.AuthRepository;
 import edu.puj.toolmaster.users.persistance.CityRepository;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +36,12 @@ public class UserService {
 
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAllByActiveTrue(pageable);
+    }
+
+    public Page<User> userByNameLike(String name, Pageable pageable) {
+        String matchName = "%" + name + "%";
+        Specification<User> spec = Specification.where((root, query, cb) -> cb.like(root.get(User_.name), matchName));
+        return userRepository.findAll(spec, pageable);
     }
 
     public User getUserById(Long id) throws ResourceNotFoundException {

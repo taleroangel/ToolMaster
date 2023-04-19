@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     @Autowired
     UserService service;
@@ -26,7 +26,15 @@ public class UserController {
         return service.getAllUsers(PageRequest.of(page, size, Sort.by(sort)));
     }
 
-    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/search/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    Page<User> searchUsersByName(@RequestParam(defaultValue = "0") Integer page,
+                                 @RequestParam(defaultValue = "10") Integer size,
+                                 @RequestParam(defaultValue = "name") String sort,
+                                 @PathVariable String name) {
+        return service.userByNameLike(name, PageRequest.of(page, size, Sort.by(sort)));
+    }
+
+    @GetMapping(value = "/id/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     User getUserById(@PathVariable Long id) {
         return service.getUserById(id);
     }
@@ -34,10 +42,10 @@ public class UserController {
     @PostMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<User> createNewUser(@RequestBody User user) {
         try {
-            return new ResponseEntity<User>(service.addNewUser(user), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.addNewUser(user), HttpStatus.CREATED);
         } catch (EntityAlreadyExistsException e) {
             // Use Liskov Substitution principle to return a user from a DomainEntity
-            return new ResponseEntity<User>((User) e.getResource(), HttpStatus.OK);
+            return new ResponseEntity<>((User) e.getResource(), HttpStatus.OK);
         }
     }
 

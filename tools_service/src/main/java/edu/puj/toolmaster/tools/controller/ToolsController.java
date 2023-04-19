@@ -16,7 +16,7 @@ import org.springframework.http.HttpStatus;
  */
 @RestController
 @RequestMapping("/api/tools")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ToolsController {
     @Autowired
     ToolService service;
@@ -32,8 +32,27 @@ public class ToolsController {
     @GetMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE})
     Page<Tool> getAllTools(@RequestParam(defaultValue = "0") Integer page,
                            @RequestParam(defaultValue = "10") Integer size,
-                           @RequestParam(defaultValue = "name") String sort) {
+                           @RequestParam(defaultValue = "name") String sort
+    ) {
         return service.getAllTools(PageRequest.of(page, size, Sort.by(sort)));
+    }
+
+    @GetMapping(value = "/search/name/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    Page<Tool> getToolsByName(@RequestParam(defaultValue = "0") Integer page,
+                              @RequestParam(defaultValue = "10") Integer size,
+                              @RequestParam(defaultValue = "name") String sort,
+                              @PathVariable String name
+    ) {
+        return service.toolByNameLike(name, PageRequest.of(page, size, Sort.by(sort)));
+    }
+
+    @GetMapping(value = "/search/brand/{brand}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    Page<Tool> getToolsByBrand(@RequestParam(defaultValue = "0") Integer page,
+                               @RequestParam(defaultValue = "10") Integer size,
+                               @RequestParam(defaultValue = "name") String sort,
+                               @PathVariable String brand
+    ) {
+        return service.toolByBrand(brand, PageRequest.of(page, size, Sort.by(sort)));
     }
 
     /**
@@ -59,20 +78,36 @@ public class ToolsController {
             return new ResponseEntity<Tool>(service.addNewTool(tool), HttpStatus.CREATED);
         } catch (EntityAlreadyExistsException e) {
             // Use Liskov Substitution principle to return a tool from a DomainEntity
-            return new ResponseEntity<Tool>((Tool) e.getResource(), HttpStatus.OK);
+            return new ResponseEntity<Tool>((Tool) e.getResource(), HttpStatus.BAD_REQUEST);
         }
     }
 
+    /**
+     * Borrar una herramienta por su ID
+     * @param id ID de la herramienta a borrar
+     */
     @DeleteMapping(value = "/{id}")
     public void deleteToolById(@PathVariable Integer id) {
         service.deleteToolById(id);
     }
 
+    /**
+     * Actualizar la herramienta por su ID
+     * @param id ID de la herramienta a actualizar
+     * @param tool Nueva información de la herramienta
+     * @return Nueva herramienta actualizada
+     */
     @PutMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public Tool updateToolById(@PathVariable Integer id, @RequestBody Tool tool) {
         return service.updateToolById(id, tool);
     }
 
+    /**
+     * Actualizar una herramienta de manera parcial por su ID
+     * @param id ID de la herramienta a actualizar
+     * @param tool Herramienta con campos nulos
+     * @return Nueva herramienta actualizada
+     */
     @PatchMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public Tool partialToolUpdate(@PathVariable Integer id, @RequestBody Tool tool) {
         return service.partialToolUpdateById(id, tool);

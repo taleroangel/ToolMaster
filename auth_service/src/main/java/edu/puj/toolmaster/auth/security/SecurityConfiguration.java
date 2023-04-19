@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 import javax.sql.DataSource;
 
@@ -25,14 +26,16 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
-                e -> e.requestMatchers("/api/auth/login").permitAll()
-                             .anyRequest().authenticated()
-        ).httpBasic();
         // Disable CSRF
         http.csrf().disable();
+        // Cors Setup
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         // Do not create session cookies
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.authorizeHttpRequests(
+                e -> e.requestMatchers("/api/auth/login").permitAll()
+                             .anyRequest().authenticated().shouldFilterAllDispatcherTypes(false)
+        ).httpBasic();
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
