@@ -36,6 +36,7 @@ public class ToolService {
     /**
      * Get a paged list of all tools
      *
+     * @param pageable pages
      * @return Page with tools
      */
     public Page<Tool> getAllTools(Pageable pageable) {
@@ -85,7 +86,7 @@ public class ToolService {
      *
      * @param tool Tool to parse
      * @return Parsed tool
-     * @throws ResourceBadRequestException, cities or brand had invalid values
+     * @throws ResourceBadRequestException cities or brand had invalid values
      * @see edu.puj.toolmaster.tools.services.ToolService#parseToolBrand
      * @see edu.puj.toolmaster.tools.services.ToolService#parseToolCities
      */

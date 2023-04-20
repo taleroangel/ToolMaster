@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToolsComponent } from './components/tools/tools.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UsersComponent } from './components/users/users.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UsersComponent } from './components/users/users.component';
     LoginComponent,
     ToolsComponent,
     WelcomeComponent,
-    UsersComponent
+    UsersComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
