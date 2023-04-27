@@ -18,8 +18,8 @@ export class AuthService {
    * @param cookies Servicio de almacenamiento de cookies
    */
   constructor(
-    private http: HttpClient,
-    private cookies: CookieService
+    protected http: HttpClient,
+    protected cookies: CookieService
   ) { }
 
 
@@ -60,7 +60,7 @@ export class AuthService {
   /**
    * Setter privado para establecer el nombre de usuario en una cookie
    */
-  private set username(username: string) {
+  protected set username(username: string) {
     this.cookies.set('username', username)
   }
 
@@ -74,7 +74,7 @@ export class AuthService {
   /**
    * Setter privado para establecer el token de autenticación
    */
-  private set token(token: string) {
+  protected set token(token: string) {
     this.cookies.set('token', token)
   }
 

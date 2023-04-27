@@ -95,18 +95,22 @@ export class ToolsComponent implements OnInit {
   /**
    * Obtener las herramientas utilizando las variables de ordenamiento y paginado
    */
-  fetchTools(): void {
-    this.toolService.searchAllTools(this.currentSort, this.currentPage).subscribe({
-      next: data => {
-        this.pagination = data;
-        this.tools = data.content;
-        this.isReady = true;
-      },
-      error: error => {
-        console.error(error);
-        alert("Error!, No se ha podido conectar con el servidor")
-      }
-    })
+  fetchTools(): Promise<boolean> {
+    return new Promise<boolean>((resolve, _) => {
+      this.toolService.searchAllTools(this.currentSort, this.currentPage).subscribe({
+        next: data => {
+          this.pagination = data;
+          this.tools = data.content;
+          this.isReady = true;
+          resolve(true)
+        },
+        error: error => {
+          console.error(error);
+          alert("Error!, No se ha podido conectar con el servidor")
+          resolve(false)
+        }
+      })
+    });
   }
 
   /**
@@ -127,43 +131,50 @@ export class ToolsComponent implements OnInit {
   /**
    * Obtener las herramientas cuyo nombre coincida o incluya el especificado
    */
-  searchByName(): void {
-    if (this.searchName.length == 0)
-      return this.fetchTools()
+  searchByName(): boolean {
+    if (this.searchName.length == 0) {
+      this.fetchTools()
+      return false
+    } else {
+      this.toolService.searchByName(this.searchName, this.currentSort, this.currentPage).subscribe({
+        next: data => {
+          this.pagination = data;
+          this.tools = data.content;
+          this.isReady = true;
+        },
+        error: error => {
+          console.error(error);
+          alert("Error!, No se ha podido conectar con el servidor")
+        }
+      })
 
-    this.toolService.searchByName(this.searchName, this.currentSort, this.currentPage).subscribe({
-      next: data => {
-        this.pagination = data;
-        this.tools = data.content;
-        this.isReady = true;
-      },
-      error: error => {
-        console.error(error);
-        alert("Error!, No se ha podido conectar con el servidor")
-      }
-    })
+      return true
+    }
   }
 
   /**
    * Buscar las herramientas cuya marca coincida o incluya la especificada
    * @param brand Marca por la cual filtrar=
    */
-  searchByBrand(brand: string): void {
+  searchByBrand(brand: string): boolean {
     this.brandFilter = brand
 
-    if (this.brandFilter.length == 0)
-      return this.fetchTools()
-
-    this.toolService.searchByBrand(this.brandFilter, this.currentSort, this.currentPage).subscribe({
-      next: data => {
-        this.pagination = data;
-        this.tools = data.content;
-      },
-      error: error => {
-        console.error(error);
-        alert("Error!, No se ha podido conectar con el servidor")
-      }
-    })
+    if (this.brandFilter.length == 0) {
+      this.fetchTools()
+      return false
+    } else {
+      this.toolService.searchByBrand(this.brandFilter, this.currentSort, this.currentPage).subscribe({
+        next: data => {
+          this.pagination = data;
+          this.tools = data.content;
+        },
+        error: error => {
+          console.error(error);
+          alert("Error!, No se ha podido conectar con el servidor")
+        }
+      })
+      return true
+    }
   }
 
   /**

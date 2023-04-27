@@ -10,7 +10,7 @@ export interface Tool {
   name: string
   brand: Brand
   description: string
-  image: string
+  image?: string
   price: number
   cities: City[]
   units: number

@@ -66,9 +66,11 @@ export class LoginComponent {
    * Función mediante la cual se cierra sesión en caso de que el usuario esté
    * autenticado
    */
-  logOut() {
+  logOut(navigateToHome = false) {
     this.authService.logout()
     alert("Sesión cerrada correctamente")
-    this.router.navigateByUrl('/home')
+
+    if (navigateToHome)
+      this.router.navigateByUrl('/home')
   }
 }

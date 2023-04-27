@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToolsComponent } from './components/tools/tools.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UsersComponent } from './components/users/users.component';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,10 @@ import { FooterComponent } from './footer/footer.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    HttpClientModule,
+    FormsModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
