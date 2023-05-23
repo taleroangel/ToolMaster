@@ -17,11 +17,13 @@ describe('ToolsComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [ToolsComponent],
-      imports: [BrowserModule,
+      imports: [
+        BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
-        FormsModule]
+        FormsModule
+      ]
     })
 
     TestBed.overrideComponent(ToolsComponent, {

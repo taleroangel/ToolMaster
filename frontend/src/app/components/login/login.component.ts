@@ -23,17 +23,17 @@ export class LoginComponent {
 
   /**
    * Constructor con la inyección de dependencias
-   * @param authService Servicio de autenticación
+   * @param AuthService Servicio de autenticación
    * @param router Enrutador para cambiar la ruta una vez se autentique
    */
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private AuthService: AuthService, private router: Router) { }
 
   /**
    * Obtener el estado de la autenticación
    * @return True si está autenticado
    */
   get authenticated(): boolean {
-    return this.authService.authenticated;
+    return this.AuthService.authenticated;
   }
 
   /**
@@ -52,7 +52,7 @@ export class LoginComponent {
     }
 
     // Hacer la petición
-    this.authService.login(userParam, passParam, () => {
+    this.AuthService.login(userParam, passParam, () => {
       this.router.navigateByUrl('/home')
     }, () => {
       alert("Error!, usuario o contraseña son incorrectos")
@@ -67,7 +67,7 @@ export class LoginComponent {
    * autenticado
    */
   logOut(navigateToHome = false) {
-    this.authService.logout()
+    this.AuthService.logout()
     alert("Sesión cerrada correctamente")
 
     if (navigateToHome)

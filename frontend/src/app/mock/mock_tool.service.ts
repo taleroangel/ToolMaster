@@ -2,7 +2,9 @@ import { Observable, Observer } from "rxjs";
 import { Pageable } from "../interfaces/pageable";
 import { Tool } from "../models/tool";
 import { ToolService, ToolSort } from "../services/tool.service";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class MockToolService extends ToolService {
 
     static mockTools: Tool[] = [{

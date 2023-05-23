@@ -17,9 +17,9 @@ export class UserService {
   /**
    * Constructor por defecto con inyección de dependencias
    * @param http Cliente HTTP para realizar peticiones REST
-   * @param authService Servicio de autenticación para recuperar el token
+   * @param AuthService Servicio de autenticación para recuperar el token
    */
-  constructor(private http: HttpClient, public authService: AuthService) { }
+  constructor(private http: HttpClient, public AuthService: AuthService) { }
 
   /**
    * Buscar todos los usuarios, con paginación
@@ -29,7 +29,7 @@ export class UserService {
    */
   searchAllUsers(sort: UserSort, page: number = 0): Observable<Pageable<User>> {
     const params = new HttpParams().set('sort', sort).set('page', page);
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.AuthService.token}`);
     return this.http.get<Pageable<User>>("http://localhost:8082/api/users/", { params: params, headers: headers })
   }
 
@@ -41,7 +41,7 @@ export class UserService {
    */
   searchByName(name: string, sort: UserSort = UserSort.NONE, page: number = 0): Observable<Pageable<User>> {
     const params = new HttpParams().set('sort', sort).set('page', page);
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.AuthService.token}`);
     return this.http.get<Pageable<User>>(`http://localhost:8082/api/users/search/${name}`, { params: params, headers: headers })
   }
 
@@ -51,7 +51,7 @@ export class UserService {
    * @returns Observable con la petición
    */
   deleteById(id: number): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.AuthService.token}`);
     return this.http.delete<Pageable<User>>(`http://localhost:8082/api/users/${id}`, { headers: headers })
   }
 }

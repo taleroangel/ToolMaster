@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class WelcomeComponent {
   /**
    * Constructor del componente
-   * @param authService Servicio de autenticación para mostrar una bienvenida de usuario
+   * @param AuthService Servicio de autenticación para mostrar una bienvenida de usuario
    */
-  constructor(public authService: AuthService) { }
+  constructor(public AuthService: AuthService) { }
 }

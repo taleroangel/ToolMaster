@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, forwardRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Token } from '../interfaces/token';
@@ -13,15 +13,14 @@ import { Token } from '../interfaces/token';
 export class AuthService {
 
   /**
-   * Constructor por defecto con inyección de dependencias
-   * @param http Cliente HTTP para las peticiones rest
-   * @param cookies Servicio de almacenamiento de cookies
-   */
+ * Constructor por defecto con inyección de dependencias
+ * @param http Cliente HTTP para las peticiones rest
+ * @param cookies Servicio de almacenamiento de cookies
+ */
   constructor(
     protected http: HttpClient,
     protected cookies: CookieService
   ) { }
-
 
   /**
    * Iniciar sesión en el backend y almacenar el Json Web Token (JWT)
@@ -52,7 +51,7 @@ export class AuthService {
   /**
    * Cerrar sesión eliminando las cookies almacenadas
    */
-  logout() {
+  logout(): void {
     this.cookies.delete('token')
     this.cookies.delete('username')
   }
@@ -67,7 +66,7 @@ export class AuthService {
   /**
    * Obtener el nombre de usuario, vacío si no hay usuario autenticado
    */
-  public get username(): string {
+  get username(): string {
     return this.cookies.get('username')
   }
 
@@ -81,7 +80,7 @@ export class AuthService {
   /**
    * Obtener el token JWT para la autenticación Bearer
    */
-  public get token(): string {
+  get token(): string {
     return this.cookies.get('token')
   }
 

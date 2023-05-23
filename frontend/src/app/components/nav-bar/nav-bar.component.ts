@@ -12,9 +12,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent {
   /**
    * Constructor con la inyección de dependencias
-   * @param authService Servicio de autenticación
+   * @param AuthService Servicio de autenticación
    */
-  constructor(private authService: AuthService) { }
+  constructor(private AuthService: AuthService) { }
 
   /**
    * Verificar si el usuario está autenticado para cambiar el botón de login
@@ -22,6 +22,6 @@ export class NavBarComponent {
    * @return True si se encuentra autenticado
    */
   get authenticated(): boolean {
-    return this.authService.authenticated;
+    return this.AuthService.authenticated;
   }
 }

@@ -67,12 +67,12 @@ export class ToolsComponent implements OnInit {
    * Constructor con los servicios inyectados
    * @param toolService Servicio de Herramientas
    * @param brandService Servicio de marcas
-   * @param authService Servicio de autenticación
+   * @param AuthService Servicio de autenticación
    */
   constructor(
     private toolService: ToolService,
     private brandService: BrandService,
-    private authService: AuthService,
+    private AuthService: AuthService,
   ) {
   }
 
@@ -89,7 +89,7 @@ export class ToolsComponent implements OnInit {
    * @returns True si está autenticado
    */
   get authenticated(): boolean {
-    return this.authService.authenticated
+    return this.AuthService.authenticated
   }
 
   /**
@@ -162,6 +162,7 @@ export class ToolsComponent implements OnInit {
     if (this.brandFilter.length == 0) {
       this.fetchTools()
       return false
+
     } else {
       this.toolService.searchByBrand(this.brandFilter, this.currentSort, this.currentPage).subscribe({
         next: data => {
@@ -174,6 +175,7 @@ export class ToolsComponent implements OnInit {
         }
       })
       return true
+
     }
   }
 

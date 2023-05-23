@@ -58,8 +58,8 @@ export class UsersComponent implements OnInit {
    * @param authService Servicio de autenticación
    */
   constructor(
-    private userService: UserService,
-    private authService: AuthService) { }
+    public userService: UserService,
+    public authService: AuthService) { }
 
   /**
    * Cargar contenido una vez se inicie la página
