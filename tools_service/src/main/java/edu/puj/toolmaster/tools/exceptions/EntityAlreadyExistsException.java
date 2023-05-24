@@ -1,4 +1,4 @@
-package edu.puj.toolmaster.tools.services.exceptions;
+package edu.puj.toolmaster.tools.exceptions;
 
 import edu.puj.toolmaster.tools.entities.DomainEntity;
 import lombok.AllArgsConstructor;

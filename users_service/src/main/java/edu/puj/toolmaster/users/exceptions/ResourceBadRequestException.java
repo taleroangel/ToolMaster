@@ -1,4 +1,4 @@
-package edu.puj.toolmaster.users.services.exceptions;
+package edu.puj.toolmaster.users.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
