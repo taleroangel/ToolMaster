@@ -7,9 +7,9 @@ import edu.puj.toolmaster.users.entities.auth.Auth;
 import edu.puj.toolmaster.users.persistance.AuthRepository;
 import edu.puj.toolmaster.users.persistance.CityRepository;
 import edu.puj.toolmaster.users.persistance.UserRepository;
-import edu.puj.toolmaster.users.services.exceptions.EntityAlreadyExistsException;
-import edu.puj.toolmaster.users.services.exceptions.ResourceBadRequestException;
-import edu.puj.toolmaster.users.services.exceptions.ResourceNotFoundException;
+import edu.puj.toolmaster.users.exceptions.EntityAlreadyExistsException;
+import edu.puj.toolmaster.users.exceptions.ResourceBadRequestException;
+import edu.puj.toolmaster.users.exceptions.ResourceNotFoundException;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -19,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,8 +54,7 @@ public class UserService {
     public City parseUserCity(User user) throws ResourceBadRequestException {
         return user.getCity().getId() == null ? cityRepository.findByName(user.getCity().getName())
                                                         .orElseThrow(ResourceNotFoundException::new)
-                       : cityRepository.findById(user.getCity().getId()
-        ).orElseGet(() -> cityRepository.save(user.getCity()));
+                       : cityRepository.findById(user.getCity().getId()).orElseGet(() -> cityRepository.save(user.getCity()));
     }
 
     public User addNewUser(@NonNull User user) throws ResourceBadRequestException, EntityAlreadyExistsException {
@@ -94,7 +92,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User updateUserById(Long id, User user) throws ResourceBadRequestException {
+    public User updateUserById(Long id, User user) throws ResourceBadRequestException, ResourceNotFoundException {
         try {
             // Find already existing user
             User findUser = userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);

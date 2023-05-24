@@ -8,12 +8,18 @@ export class MockAuthService extends AuthService {
   private _username: string = "";
   private _token: string = "";
 
-  override login(user: string, password: string, onSuccessCallback: Function, onFailureCallback: Function): void {
-    this._username = user
-    this._token = 'mock-token'
-    this._authenticated = true
+  public shouldAccept = true;
 
-    onSuccessCallback.call(null)
+  override login(user: string, password: string, onSuccessCallback: Function, onFailureCallback: Function): void {
+    if (this.shouldAccept) {
+      this._username = user
+      this._token = 'mock-token'
+      this._authenticated = true
+      onSuccessCallback.call(null)
+    } else {
+      this.logout()
+      onFailureCallback.call(null)
+    }
   }
 
   override get authenticated(): boolean {

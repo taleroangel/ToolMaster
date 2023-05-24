@@ -6,7 +6,7 @@ services:
   database:
     build:
       context: ./database
-      dockerfile: Containerfile
+      dockerfile: ./Containerfile
       args:
         MYSQL_TCP_PORT: ${MYSQL_TCP_PORT}
 

@@ -99,6 +99,11 @@
             "styles": [
               "src/styles.scss"
             ],
+            "codeCoverageExclude": [
+              "src/app/mock/**/*",
+              "src/app/interfaces/**/*",
+              "src/app/modules/**/*"
+            ],
             "scripts": [],
             "karmaConfig": "karma.conf.js"
           }

@@ -23,24 +23,24 @@ export class LoginComponent {
 
   /**
    * Constructor con la inyección de dependencias
-   * @param AuthService Servicio de autenticación
+   * @param authService Servicio de autenticación
    * @param router Enrutador para cambiar la ruta una vez se autentique
    */
-  constructor(private AuthService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, public router: Router) { }
 
   /**
    * Obtener el estado de la autenticación
    * @return True si está autenticado
    */
   get authenticated(): boolean {
-    return this.AuthService.authenticated;
+    return this.authService.authenticated;
   }
 
   /**
    * Función mediante la cual se entregan los resultados del formulario
    * al backend para realizar la autenticación
    */
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     // Obtener los parámetros
     const userParam: string = this.checkoutForm.value.user;
     const passParam: string = this.checkoutForm.value.password;
@@ -52,14 +52,20 @@ export class LoginComponent {
     }
 
     // Hacer la petición
-    this.AuthService.login(userParam, passParam, () => {
-      this.router.navigateByUrl('/home')
-    }, () => {
-      alert("Error!, usuario o contraseña son incorrectos")
+    let loginPromise = new Promise<void>((resolve, reject) => {
+      this.authService.login(userParam, passParam, () => {
+        this.router.navigateByUrl('/home')
+        resolve()
+      }, () => {
+        alert("Error!, usuario o contraseña son incorrectos")
+        reject()
+      })
     })
 
     // Reiniciar el form
     this.checkoutForm.reset()
+
+    return await loginPromise;
   }
 
   /**
@@ -67,7 +73,7 @@ export class LoginComponent {
    * autenticado
    */
   logOut(navigateToHome = false) {
-    this.AuthService.logout()
+    this.authService.logout()
     alert("Sesión cerrada correctamente")
 
     if (navigateToHome)

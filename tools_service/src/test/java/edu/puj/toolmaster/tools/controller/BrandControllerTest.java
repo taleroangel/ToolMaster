@@ -1,4 +1,4 @@
-package edu.puj.toolmaster.tools;
+package edu.puj.toolmaster.tools.controller;
 
 import edu.puj.toolmaster.tools.controller.BrandController;
 import edu.puj.toolmaster.tools.entities.Brand;

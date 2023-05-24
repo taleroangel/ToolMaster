@@ -67,12 +67,12 @@ export class ToolsComponent implements OnInit {
    * Constructor con los servicios inyectados
    * @param toolService Servicio de Herramientas
    * @param brandService Servicio de marcas
-   * @param AuthService Servicio de autenticación
+   * @param authService Servicio de autenticación
    */
   constructor(
     private toolService: ToolService,
     private brandService: BrandService,
-    private AuthService: AuthService,
+    private authService: AuthService,
   ) {
   }
 
@@ -89,7 +89,7 @@ export class ToolsComponent implements OnInit {
    * @returns True si está autenticado
    */
   get authenticated(): boolean {
-    return this.AuthService.authenticated
+    return this.authService.authenticated
   }
 
   /**
@@ -206,5 +206,17 @@ export class ToolsComponent implements OnInit {
       this.currentPage -= 1
       this.fetchTools()
     }
+  }
+
+  eraseTool(id: number) {
+    this.toolService.eraseToolById(id).subscribe({
+      next: () => {
+        alert("Borrado correctamente!")
+        this.fetchTools()
+      },
+      error: () => {
+        alert("Ha ocurrido un error!")
+      }
+    })
   }
 }

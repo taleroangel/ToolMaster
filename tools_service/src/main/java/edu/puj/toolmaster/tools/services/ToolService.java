@@ -4,9 +4,9 @@ import edu.puj.toolmaster.tools.entities.*;
 import edu.puj.toolmaster.tools.persistance.BrandRepository;
 import edu.puj.toolmaster.tools.persistance.CityRepository;
 import edu.puj.toolmaster.tools.persistance.ToolRepository;
-import edu.puj.toolmaster.tools.services.exceptions.EntityAlreadyExistsException;
-import edu.puj.toolmaster.tools.services.exceptions.ResourceBadRequestException;
-import edu.puj.toolmaster.tools.services.exceptions.ResourceNotFoundException;
+import edu.puj.toolmaster.tools.exceptions.EntityAlreadyExistsException;
+import edu.puj.toolmaster.tools.exceptions.ResourceBadRequestException;
+import edu.puj.toolmaster.tools.exceptions.ResourceNotFoundException;
 import jakarta.persistence.criteria.*;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,8 @@ public class ToolService {
 
     /**
      * Obtener las herramientas cuyo nombre coincida o contenga el especificado
-     * @param name Nombre de la herramientas
+     *
+     * @param name     Nombre de la herramientas
      * @param pageable Criterio de paginación
      * @return Herramientas paginadas
      */
@@ -57,7 +58,8 @@ public class ToolService {
 
     /**
      * Obtener las herramientas que tengan una marca cuyo nombre coincida o contenga el especificado
-     * @param brand Nombre de la marca
+     *
+     * @param brand    Nombre de la marca
      * @param pageable Criterio de paginación
      * @return Herramientas paginadas
      */
@@ -187,6 +189,8 @@ public class ToolService {
             Tool parsedTool = parseTool(tool);
             // Save the changes
             return toolRepository.save(parsedTool.withId(findTool.getId()));
+        } catch (ResourceNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             // Throws null pointer exception if brand or city could not be created
             throw new ResourceBadRequestException();

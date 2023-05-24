@@ -1,8 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pageable } from 'src/app/interfaces/pageable';
 import { Tool } from 'src/app/models/tool';
+import { AuthService } from './auth.service';
 
 /**
  * Servicio para obtener las herramientas desde el Backend
@@ -15,8 +16,9 @@ export class ToolService {
   /**
    * Constructor por defecto con inyección de dependencias
    * @param http Cliente HTTP para realizar peticiones REST
+   * @param authService Servicio de autenticación para rutas protegidas
    */
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient, public authService: AuthService) { }
 
   /**
    * Buscar todas las herramientas, con paginación
@@ -49,6 +51,16 @@ export class ToolService {
   searchByBrand(brand: string, sort: ToolSort = ToolSort.NONE, page: number = 0): Observable<Pageable<Tool>> {
     const params = new HttpParams().set('sort', sort).set('page', page);
     return this.http.get<Pageable<Tool>>(`http://localhost:8081/api/tools/search/brand/${brand}`, { params: params })
+  }
+
+  /**
+   * Borrar la herramienta dado su ID
+   * @param id ID de la herramienta a borrar
+   * @returns Observable de rxjs con la petición
+   */
+  eraseToolById(id: number): Observable<void> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.token}`);
+    return this.http.delete<void>(`http://localhost:8081/api/tools/${id}`, { headers: headers });
   }
 }
 

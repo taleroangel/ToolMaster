@@ -1,4 +1,4 @@
-package edu.puj.toolmaster.tools;
+package edu.puj.toolmaster.tools.controller;
 
 import edu.puj.toolmaster.tools.entities.City;
 import edu.puj.toolmaster.tools.services.CityService;

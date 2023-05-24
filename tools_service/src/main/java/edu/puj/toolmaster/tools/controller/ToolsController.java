@@ -2,7 +2,7 @@ package edu.puj.toolmaster.tools.controller;
 
 import edu.puj.toolmaster.tools.entities.Tool;
 import edu.puj.toolmaster.tools.services.ToolService;
-import edu.puj.toolmaster.tools.services.exceptions.EntityAlreadyExistsException;
+import edu.puj.toolmaster.tools.exceptions.EntityAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

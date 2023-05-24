@@ -1,6 +1,7 @@
 package edu.puj.toolmaster.users.entities.auth;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 @AllArgsConstructor
+@NoArgsConstructor
 public class AuthDetails implements UserDetails {
     @NonNull
     private Auth auth;

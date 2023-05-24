@@ -3,7 +3,6 @@ package edu.puj.toolmaster.tools.security.jwt;
 import edu.puj.toolmaster.tools.entities.auth.Auth;
 import edu.puj.toolmaster.tools.entities.auth.AuthDetails;
 import edu.puj.toolmaster.tools.services.AuthService;
-import edu.puj.toolmaster.tools.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

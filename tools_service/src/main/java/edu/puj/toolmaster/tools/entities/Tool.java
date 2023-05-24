@@ -25,7 +25,7 @@ public class Tool extends DomainEntity {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Brand brand;
 
     @Column
@@ -37,7 +37,7 @@ public class Tool extends DomainEntity {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<City> cities;
 
     @Column(nullable = false)
