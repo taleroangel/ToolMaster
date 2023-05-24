@@ -5,10 +5,8 @@ import edu.puj.toolmaster.auth.entities.AuthDetails;
 import edu.puj.toolmaster.auth.persistance.AuthRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -37,7 +35,7 @@ public class AuthServiceTest {
     @Test
     public void getUserByUsernameTest() {
         when(authRepository.findByUsername("username")).thenReturn(Optional.of(auth));
-        Optional<Auth> result = authService.getUserByUsername("username");
+        Optional<Auth> result = authService.getAuthByUsername("username");
 
         assertEquals(result.get().getUsername(), auth.getUsername());
     }

@@ -37,16 +37,16 @@ module.exports = function (config) {
     restartOnFileChange: true,
     check: {
       global: {
-        statements: 40,
-        branches: 40,
-        functions: 40,
-        lines: 40
+        statements: 75,
+        branches: 75,
+        functions: 75,
+        lines: 75
       },
       watermarks: {
-        statements: [30, 40],
-        functions: [30, 40],
-        branches: [30, 40],
-        lines: [30, 40]
+        statements: [30, 50, 75],
+        functions: [30, 50, 75],
+        branches: [30, 50, 75],
+        lines: [30, 50, 75],
       }
     }
   });

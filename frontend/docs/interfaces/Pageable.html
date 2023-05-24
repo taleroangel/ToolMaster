@@ -198,6 +198,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Contenido de la paginación</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -231,6 +237,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>La página está vacía?</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -264,6 +276,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Es primera página?</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -297,6 +315,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Es última página?</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -330,6 +354,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Número de página</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -363,6 +393,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Cantidad de elementos por página</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -396,6 +432,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Propiedades de paginado</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -429,6 +471,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Cantidad de elementos en la página</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -462,6 +510,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Criterio de ordenamiento</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -495,6 +549,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Número total de elementos</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -528,6 +588,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Numero total de páginas</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -536,31 +602,119 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Pageable&lt;T&gt; {
+  /**
+   * Contenido de la paginación
+   */
   content: T[]
+
+  /**
+   * Propiedades de paginado
+   */
   pageable: {
+    /**
+   * Criterio de ordenamiento
+   */
     sort: {
+      /**
+       * No hay criterio
+       */
       empty: boolean
+
+      /**
+       * No está ordenado
+       */
       unsorted: boolean
+
+      /**
+       * Está ordenado
+       */
       sorted: boolean
     }
+
+    /**
+     * Offset de elementos en la página
+     */
     offset: number
+
+    /**
+     * Número de la página
+     */
     pageNumber: number
+
+    /**
+     * Tamaño de la página
+     */
     pageSize: number
+
+    /**
+     * Está paginado
+     */
     paged: boolean
+
+    /**
+     * No está paginado
+     */
     unpaged: boolean
   }
+
+  /**
+   * Numero total de páginas
+   */
   totalPages: number
+
+  /**
+   * Número total de elementos
+   */
   totalElements: number
+
+  /**
+   * Es última página?
+   */
   last: boolean
+
+  /**
+   * Cantidad de elementos en la página
+   */
   size: number
+
+  /**
+   * Número de página
+   */
   number: number
+
+  /**
+   * Criterio de ordenamiento
+   */
   sort: {
+    /**
+     * No hay criterio
+     */
     empty: boolean
+
+    /**
+     * No está ordenado
+     */
     unsorted: boolean
+
+    /**
+     * Está ordenado
+     */
     sorted: boolean
   }
+
+  /**
+   * Cantidad de elementos por página
+   */
   numberOfElements: number
+
+  /**
+   * Es primera página?
+   */
   first: boolean
+
+  /**
+   * La página está vacía?
+   */
   empty: boolean
 }
 </code></pre>

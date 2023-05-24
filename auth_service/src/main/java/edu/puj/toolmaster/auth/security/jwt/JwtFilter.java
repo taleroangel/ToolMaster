@@ -18,6 +18,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * Filtro que implementa seguridad de tokens JWT
+ */
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     @Autowired
@@ -38,7 +41,7 @@ public class JwtFilter extends OncePerRequestFilter {
             String authToken = getAccessToken(request);
             String username = jwt.validateToken(authToken);
 
-            Auth auth = authService.getUserByUsername(username).orElseThrow(Exception::new);
+            Auth auth = authService.getAuthByUsername(username).orElseThrow(Exception::new);
 
             UserDetails details = (UserDetails) new AuthDetails(auth);
             UsernamePasswordAuthenticationToken authenticationToken =

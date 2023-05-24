@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * Clase que implementa la verificación y creación de tokens JWT
+ */
 @Component
 public class JwtSecurity implements TokenValidator, TokenGenerator {
 

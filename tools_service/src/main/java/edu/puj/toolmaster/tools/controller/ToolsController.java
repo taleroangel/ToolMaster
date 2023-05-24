@@ -37,6 +37,14 @@ public class ToolsController {
         return service.getAllTools(PageRequest.of(page, size, Sort.by(sort)));
     }
 
+    /**
+     * Obtener las herramientas con el nombre
+     * @param page Número de la página
+     * @param size Tamaño de la página
+     * @param sort Criterio de ordenamiento
+     * @param name Nombre de la herramienta
+     * @return JSON con las herramientas
+     */
     @GetMapping(value = "/search/name/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
     Page<Tool> getToolsByName(@RequestParam(defaultValue = "0") Integer page,
                               @RequestParam(defaultValue = "10") Integer size,
@@ -46,6 +54,14 @@ public class ToolsController {
         return service.toolByNameLike(name, PageRequest.of(page, size, Sort.by(sort)));
     }
 
+    /**
+     * Obtener las herramientas con la marca
+     * @param page Número de la página
+     * @param size Tamaño de la página
+     * @param sort Criterio de ordenamiento
+     * @param brand Nombre de la marca
+     * @return JSON con las herramientas
+     */
     @GetMapping(value = "/search/brand/{brand}", produces = {MediaType.APPLICATION_JSON_VALUE})
     Page<Tool> getToolsByBrand(@RequestParam(defaultValue = "0") Integer page,
                                @RequestParam(defaultValue = "10") Integer size,

@@ -137,7 +137,7 @@ o ver el listado de usuarios en el sistema</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#authService" >authService</a>
+                                <a href="#AuthService" >AuthService</a>
                             </li>
                         </ul>
                     </td>
@@ -158,7 +158,7 @@ o ver el listado de usuarios en el sistema</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+<code>constructor(AuthService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -184,7 +184,7 @@ o ver el listado de usuarios en el sistema</p>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>AuthService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
@@ -222,11 +222,11 @@ o ver el listado de usuarios en el sistema</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="authService"></a>
+                    <a name="AuthService"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
-                        <span ><b>authService</b></span>
-                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>AuthService</b></span>
+                        <a href="#AuthService"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -271,9 +271,9 @@ import { AuthService } from &#x27;src/app/services/auth.service&#x27;;
 export class WelcomeComponent {
   /**
    * Constructor del componente
-   * @param authService Servicio de autenticación para mostrar una bienvenida de usuario
+   * @param AuthService Servicio de autenticación para mostrar una bienvenida de usuario
    */
-  constructor(public authService: AuthService) { }
+  constructor(public AuthService: AuthService) { }
 }
 </code></pre>
     </div>
@@ -288,9 +288,9 @@ export class WelcomeComponent {
       ubicaciones disponibles en las diferentes ciudades del país.&lt;/p&gt;
   &lt;/div&gt;
 
-  &lt;div class&#x3D;&quot;offset&quot; *ngIf&#x3D;&quot;authService.authenticated&quot;&gt;
+  &lt;div class&#x3D;&quot;offset&quot; *ngIf&#x3D;&quot;AuthService.authenticated&quot;&gt;
     &lt;div class&#x3D;&quot;alert alert-primary&quot; role&#x3D;&quot;alert&quot;&gt;
-      Bienvenido! &lt;b&gt;{{authService.username}}&lt;/b&gt;
+      Bienvenido! &lt;b&gt;{{AuthService.username}}&lt;/b&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -356,8 +356,8 @@ export class WelcomeComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="header">  <img src="assets/images/hardware.png" alt="" srcset="">  <div class="content">    <h1 class="title">Bienvenido a ToolMaster</h1>    <p>ToolMaster es un sitio web para la administración de Ferreterías. En el sitio web podrás encontrar una amplia      variedad de herramientas de distintas marcas, con sus respectivas imágenes, descripciones, precios de referencia y      ubicaciones disponibles en las diferentes ciudades del país.</p>  </div>  <div class="offset" *ngIf="authService.authenticated">    <div class="alert alert-primary" role="alert">      Bienvenido! <b>{{authService.username}}</b>    </div>  </div></div><div class="d-flex justify-content-center align-items-center gap-3 my-5">  <div class="card" style="width: 18rem;">    <img src="assets/images/tools.png" class="card-img-top" alt="...">    <div class="card-body">      <h5 class="card-title">Herramientas</h5>      <p class="card-text">Ventana de listado de herramientas donde podrá explorar y seleccionar entre todas las        herramientas disponibles o administrarlas si ha iniciado sesión</p>      <a href="/tools" class="btn btn-primary">Abrir Herramientas</a>    </div>  </div>  <div class="card" style="width: 18rem;">    <img src="assets/images/office.png" class="card-img-top" alt="...">    <div class="card-body">      <h5 class="card-title">Gestión de Usuarios</h5>      <p class="card-text">Ventana de administración de usuarios, donde podrá realizar tareas como agregar, editar o        eliminar usuarios, debe haber iniciado sesión para acceder.</p>      <a href="/users" class="btn btn-primary">Administrar Usuarios</a>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ToolsComponent', 'selector': 'app-tools'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'WelcomeComponent', 'selector': 'app-welcome'}];
+        var COMPONENT_TEMPLATE = '<div><div class="header">  <img src="assets/images/hardware.png" alt="" srcset="">  <div class="content">    <h1 class="title">Bienvenido a ToolMaster</h1>    <p>ToolMaster es un sitio web para la administración de Ferreterías. En el sitio web podrás encontrar una amplia      variedad de herramientas de distintas marcas, con sus respectivas imágenes, descripciones, precios de referencia y      ubicaciones disponibles en las diferentes ciudades del país.</p>  </div>  <div class="offset" *ngIf="AuthService.authenticated">    <div class="alert alert-primary" role="alert">      Bienvenido! <b>{{AuthService.username}}</b>    </div>  </div></div><div class="d-flex justify-content-center align-items-center gap-3 my-5">  <div class="card" style="width: 18rem;">    <img src="assets/images/tools.png" class="card-img-top" alt="...">    <div class="card-body">      <h5 class="card-title">Herramientas</h5>      <p class="card-text">Ventana de listado de herramientas donde podrá explorar y seleccionar entre todas las        herramientas disponibles o administrarlas si ha iniciado sesión</p>      <a href="/tools" class="btn btn-primary">Abrir Herramientas</a>    </div>  </div>  <div class="card" style="width: 18rem;">    <img src="assets/images/office.png" class="card-img-top" alt="...">    <div class="card-body">      <h5 class="card-title">Gestión de Usuarios</h5>      <p class="card-text">Ventana de administración de usuarios, donde podrá realizar tareas como agregar, editar o        eliminar usuarios, debe haber iniciado sesión para acceder.</p>      <a href="/users" class="btn btn-primary">Administrar Usuarios</a>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ToolsComponent', 'selector': 'app-tools'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'WelcomeComponent', 'selector': 'app-welcome'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'WelcomeComponent'};
 </script>

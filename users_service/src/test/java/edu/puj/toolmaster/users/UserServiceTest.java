@@ -3,6 +3,7 @@ package edu.puj.toolmaster.users;
 import edu.puj.toolmaster.users.entities.City;
 import edu.puj.toolmaster.users.entities.User;
 import edu.puj.toolmaster.users.entities.auth.Auth;
+import edu.puj.toolmaster.users.exceptions.EntityAlreadyExistsException;
 import edu.puj.toolmaster.users.exceptions.ResourceBadRequestException;
 import edu.puj.toolmaster.users.exceptions.ResourceNotFoundException;
 import edu.puj.toolmaster.users.persistance.AuthRepository;
@@ -11,8 +12,10 @@ import edu.puj.toolmaster.users.persistance.UserRepository;
 import edu.puj.toolmaster.users.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +28,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SpringBootTest
 public class UserServiceTest {
 
     @Mock
@@ -36,15 +40,12 @@ public class UserServiceTest {
     @Mock
     private AuthRepository authRepository;
 
+    @InjectMocks
     private UserService userService;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        userService = new UserService();
-        ReflectionTestUtils.setField(userService, "userRepository", userRepository);
-        ReflectionTestUtils.setField(userService, "cityRepository", cityRepository);
-        ReflectionTestUtils.setField(userService, "authRepository", authRepository);
     }
 
     /**
@@ -257,4 +258,59 @@ public class UserServiceTest {
         assertThrows(ResourceBadRequestException.class, () -> userService.partialUserUpdateById(1L, user));
     }
 
+    @Test
+    public void partialUserUpdateById_callsAuthRepositorySave() {
+
+        var currentUser = new User().withId(1L).withActive(false);
+        var newUser = new User().withId(1L).withName("Lorem").withLastName("Ipsum").withActive(true);
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(currentUser));
+        when(userRepository.save(any())).thenReturn(currentUser.overrideWith(new User()));
+
+        userService.partialUserUpdateById(1L, newUser);
+
+        verify(authRepository).save(any());
+    }
+
+    @Test
+    public void userUpdateById_callsAuthRepositorySave() {
+
+        var currentUser = new User().withId(1L).withActive(false).withCity(new City(1, "City"));
+        var newUser = new User().withId(1L).withName("Lorem").withLastName("Ipsum").withActive(true).withCity(new City(1, "City"));
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(currentUser));
+        when(userRepository.save(any())).thenReturn(currentUser.overrideWith(new User()));
+
+        userService.updateUserById(1L, newUser);
+
+        verify(authRepository).save(any());
+    }
+
+    @Test
+    public void partialUserUpdateById_throwsNullPointerException() {
+
+        var currentUser = new User().withId(1L).withActive(false);
+        var newUser = new User().withId(1L).withName("Lorem").withActive(true);
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(currentUser));
+        when(userRepository.save(any())).thenReturn(currentUser.overrideWith(new User()));
+
+        assertThrows(NullPointerException.class, () -> userService.partialUserUpdateById(1L, newUser));
+    }
+
+    @Test
+    public void addNewUser_throwsEntityAlreadyExistsException() {
+        var user = new User().withCity(new City(1, "City"));
+        when(userRepository.findOne(any())).thenReturn(Optional.of(user));
+
+        assertThrows(EntityAlreadyExistsException.class, () -> userService.addNewUser(user));
+    }
+
+    @Test
+    public void addNewUser_throwsResourceBadRequestException() {
+        var user = new User().withCity(new City(1, "City"));
+        when(userRepository.findOne(any())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceBadRequestException.class, () -> userService.addNewUser(user));
+    }
 }

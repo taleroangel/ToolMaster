@@ -100,4 +100,16 @@ describe('ToolsComponent', () => {
     component.goPreviousPage()
     expect(component.currentPage).toBe(1)
   })
+
+  it('Should fetch all tools if success on eraseTool', () => {
+    spyOn(component, 'fetchTools');
+    component.eraseTool(1);
+    expect(component.fetchTools).toHaveBeenCalled();
+  })
+
+  it('Should not fetch all tools if success on eraseTool', () => {
+    spyOn(component, 'fetchTools');
+    component.eraseTool(-1);
+    expect(component.fetchTools).not.toHaveBeenCalled();
+  })
 });

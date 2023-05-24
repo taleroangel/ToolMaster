@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.With;
 
+/**
+ * Entidad encargada de guardar los datos de autenticación
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

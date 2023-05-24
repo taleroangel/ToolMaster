@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * Representa una entidad de autenticación
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

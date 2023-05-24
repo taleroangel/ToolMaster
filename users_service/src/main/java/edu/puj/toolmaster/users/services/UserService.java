@@ -21,6 +21,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Servicio encargado de obtener los recursos del repositorio de usuarios
+ */
 @Service
 public class UserService {
 
@@ -33,30 +36,72 @@ public class UserService {
     @Autowired
     private AuthRepository authRepository;
 
+    /**
+     * Obtener todos los usuarios
+     *
+     * @param pageable Paginación
+     * @return Página de usuarios
+     */
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAllByActiveTrue(pageable);
     }
 
+    /**
+     * Buscar usuarios con nombre que coincidan
+     *
+     * @param name     Nombre a buscar
+     * @param pageable Paginación
+     * @return Página de usuarios
+     */
     public Page<User> userByNameLike(String name, Pageable pageable) {
         String matchName = "%" + name + "%";
         Specification<User> spec = Specification.where((root, query, cb) -> cb.like(root.get(User_.name), matchName));
         return userRepository.findAll(spec, pageable);
     }
 
+    /**
+     * Obtener usuarios por su ID
+     *
+     * @param id ID del usuario
+     * @return Usuario encontrado
+     * @throws ResourceNotFoundException El usuario no fue encontrado
+     */
     public User getUserById(Long id) throws ResourceNotFoundException {
         return userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
+    /**
+     * Obtener información completa de los usuarios
+     *
+     * @param user Usuario a completar
+     * @return Usuario completo
+     * @throws ResourceBadRequestException El usuario no tiene la información necesaria
+     */
     public User parseUser(User user) throws ResourceBadRequestException {
         return user.withCity(parseUserCity(user));
     }
 
+    /**
+     * Obtener la ciudad de un usuario completa
+     *
+     * @param user Usuario a completar
+     * @return Usuario con datos de la ciudad completos
+     * @throws ResourceBadRequestException No tenía ciudad
+     */
     public City parseUserCity(User user) throws ResourceBadRequestException {
         return user.getCity().getId() == null ? cityRepository.findByName(user.getCity().getName())
                                                         .orElseThrow(ResourceNotFoundException::new)
                        : cityRepository.findById(user.getCity().getId()).orElseGet(() -> cityRepository.save(user.getCity()));
     }
 
+    /**
+     * Agregar un nuevo servicio
+     *
+     * @param user Usuario a ser agregado
+     * @return Usuario agregado
+     * @throws ResourceBadRequestException  El usuario está en un formato incorrecto
+     * @throws EntityAlreadyExistsException El usuario ya existía
+     */
     public User addNewUser(@NonNull User user) throws ResourceBadRequestException, EntityAlreadyExistsException {
         try {
             // Get the parsed user
@@ -84,6 +129,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Borrar un usuario dado su id
+     *
+     * @param id ID
+     * @throws ResourceNotFoundException el ID especificado no existe
+     */
     public void deleteUserById(Long id) throws ResourceNotFoundException {
         User user = userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         // Logical Delete
@@ -92,6 +143,15 @@ public class UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Actualizar un usuario dado su ID
+     *
+     * @param id   ID del usuario a actualizar
+     * @param user Usuario con datos actualizados
+     * @return Usuario con datos actualizados
+     * @throws ResourceBadRequestException El usuario estaba en un formato incorrecto
+     * @throws ResourceNotFoundException   El usuario no existía
+     */
     public User updateUserById(Long id, User user) throws ResourceBadRequestException, ResourceNotFoundException {
         try {
             // Find already existing user
@@ -110,6 +170,14 @@ public class UserService {
         }
     }
 
+    /**
+     * Actualizar parcialmente un usuario (ignorar campos nulos)
+     *
+     * @param id   ID del usuario a actualizar
+     * @param user Usuario con información a actualizar (campos nulos permitidos)
+     * @return Usuario con la información completa
+     * @throws ResourceBadRequestException El usuario estaba en formato incorrecto
+     */
     public User partialUserUpdateById(Long id, User user) throws ResourceBadRequestException {
         try {
             // Find already existing user
@@ -126,6 +194,8 @@ public class UserService {
             }
             // Save the changes
             return ruser;
+        } catch (NullPointerException e) {
+            throw e;
         } catch (Exception e) {
             // Throws null pointer exception if brand or city could not be created
             throw new ResourceBadRequestException();

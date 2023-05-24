@@ -4,9 +4,17 @@ import { Observable } from "rxjs";
 import { Pageable } from "../interfaces/pageable";
 import { User } from "../models/user";
 
+/**
+ * Servicio de usuarios mockeado
+ */
 @Injectable()
 export class MockUserService extends UserService {
 
+  /**
+   * Borrar un usuario dado su ID
+   * @param id ID del usuario, acepta si mayor o igual a 0 o rechaza si menor a 0
+   * @returns Observable con error o siguiente
+   */
   override deleteById(id: number): Observable<any> {
     return new Observable((observe) => {
       if (id < 0) {
@@ -17,6 +25,12 @@ export class MockUserService extends UserService {
     })
   }
 
+  /**
+   * Buscar todos los usuarios
+   * @param sort Criterio de ordenamiento
+   * @param page Página
+   * @returns Página de usuarios
+   */
   override searchAllUsers(sort: UserSort, page?: number): Observable<Pageable<User>> {
     return new Observable((observable) => {
       observable.next(

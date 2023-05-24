@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+/**
+ * Clase controladora del Footer [Vacía]
+ */
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',

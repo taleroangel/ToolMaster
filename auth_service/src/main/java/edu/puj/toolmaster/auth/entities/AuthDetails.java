@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * Representa los detalles de autenticación del framework Spring
+ */
 @AllArgsConstructor
 public class AuthDetails implements UserDetails {
     @NonNull

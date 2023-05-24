@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Entidad que representa una ciudad
+ */
 @Entity
 @Getter
 @ToString

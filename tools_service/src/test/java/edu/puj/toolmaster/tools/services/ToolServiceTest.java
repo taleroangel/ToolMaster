@@ -12,6 +12,7 @@ import edu.puj.toolmaster.tools.exceptions.ResourceNotFoundException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -184,5 +186,70 @@ public class ToolServiceTest {
         }
     }
 
+    @Test
+    public void testToolByBrand() {
+        Brand brand = new Brand(1, "Brand");
+        City city = new City(1, "Bogotá");
+        Tool tool1 = new Tool().withName("Tool 1").withBrand(brand).withCities(List.of(city));
+
+        when(toolRepository.findAll(Mockito.any(Specification.class), Mockito.any(Pageable.class))).thenReturn(new PageImpl(List.of(tool1)));
+
+        var tools = toolService.toolByBrand("Brand", Pageable.ofSize(1));
+
+        assertTrue(tools.getContent().contains(tool1));
+    }
+
+    @Test
+    public void parseToolBrand_withNullId() {
+
+        var brand = new Brand(null, "Brand");
+        var tool = new Tool().withBrand(brand);
+        var expectBrand = new Brand(1, "Brand");
+
+        when(brandRepository.findByName("Brand")).thenReturn(Optional.of(expectBrand));
+
+        assertEquals(toolService.parseToolBrand(tool), expectBrand);
+    }
+
+    @Test
+    public void parseToolCity_withNullId() {
+
+        var city = new City(null, "City");
+        var tool = new Tool().withCities(List.of(city));
+        var expectCity = new City(1, "City");
+
+        when(cityRepository.findByName("City")).thenReturn(Optional.of(expectCity));
+
+        assertTrue(toolService.parseToolCities(tool).contains(expectCity));
+    }
+
+    @Test
+    public void addNewTool_throwsEntityAlreadyExistsException() {
+        var tool = new Tool().withBrand(new Brand(1, "Brand")).withCities(List.of(new City(1, "City")));
+
+        when(toolRepository.findOne(Mockito.any())).thenReturn(Optional.of(tool));
+
+        assertThrows(EntityAlreadyExistsException.class, () -> toolService.addNewTool(tool));
+    }
+
+    @Test
+    public void addNewTool_throwsResourceBadRequestException() {
+        var tool = new Tool();
+        assertThrows(ResourceBadRequestException.class, () -> toolService.addNewTool(tool));
+    }
+
+    @Test
+    public void updateToolById_throwsResourceBadRequestException() {
+        var tool = new Tool().withId(1);
+        when(toolRepository.findById(1)).thenReturn(Optional.of(tool));
+        assertThrows(ResourceBadRequestException.class, () -> toolService.updateToolById(1, tool));
+    }
+
+    @Test
+    public void partialToolUpdateById_throwsResourceBadRequestException() {
+        var tool = new Tool().withId(1);
+        when(toolRepository.findById(1)).thenReturn(Optional.empty());
+        assertThrows(ResourceBadRequestException.class, () -> toolService.partialToolUpdateById(1, tool));
+    }
 
 }

@@ -79,6 +79,12 @@ describe('LoginComponent', () => {
     expect(window.alert).toHaveBeenCalled()
   })
 
+  it('Log out default parameter should call logout', () => {
+    spyOn(component.authService, 'logout')
+    component.logOut();
+    expect(component.authService.logout).toHaveBeenCalled()
+  })
+
   it('Log out with true parameter should call navigateByUrl', () => {
     spyOn(component.router, "navigateByUrl");
     component.logOut(true);

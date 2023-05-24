@@ -208,6 +208,10 @@ export class ToolsComponent implements OnInit {
     }
   }
 
+  /**
+   * Borrar una herramienta por su ID
+   * @param id ID de la herramienta a borrar
+   */
   eraseTool(id: number) {
     this.toolService.eraseToolById(id).subscribe({
       next: () => {

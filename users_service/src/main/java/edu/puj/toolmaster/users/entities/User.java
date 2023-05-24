@@ -11,6 +11,9 @@ import lombok.With;
 
 import java.util.Date;
 
+/**
+ * Entidad para representar un usuario
+ */
 @Entity
 @Getter
 @NoArgsConstructor
@@ -27,10 +30,19 @@ public class User extends DomainEntity {
     public City city;
     public Boolean active = Boolean.TRUE;
 
+    /**
+     * Construir el nombre de usuario a partir del nombre y apellido
+     * @return Nombre de usuario
+     */
     public String getUsername() {
         return name.toLowerCase() + "_" + lastName.toLowerCase();
     }
 
+    /**
+     * Sobre los campos nulos del usuario actual con los campos no nulos del otro usuario
+     * @param other Usuario con campos no nulos para sobreescribir
+     * @return Usuario sobreescrito
+     */
     public User overrideWith(User other) {
         var overridenUser = this;
 

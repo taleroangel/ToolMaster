@@ -156,7 +156,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+<code>constructor(AuthService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -182,7 +182,7 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>AuthService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
@@ -271,9 +271,9 @@ import { AuthService } from &#x27;src/app/services/auth.service&#x27;;
 export class NavBarComponent {
   /**
    * Constructor con la inyección de dependencias
-   * @param authService Servicio de autenticación
+   * @param AuthService Servicio de autenticación
    */
-  constructor(private authService: AuthService) { }
+  constructor(private AuthService: AuthService) { }
 
   /**
    * Verificar si el usuario está autenticado para cambiar el botón de login
@@ -281,7 +281,7 @@ export class NavBarComponent {
    * @return True si se encuentra autenticado
    */
   get authenticated(): boolean {
-    return this.authService.authenticated;
+    return this.AuthService.authenticated;
   }
 }
 </code></pre>
@@ -349,7 +349,7 @@ export class NavBarComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">  <div class="container-fluid">    <a class="navbar-brand" href="/">ToolMaster</a>    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">      <span class="navbar-toggler-icon"></span>    </button>    <div class="collapse navbar-collapse" id="navbarSupportedContent">      <ul class="navbar-nav me-auto mb-2 mb-lg-0">        <li class="nav-item">          <a class="nav-link" [routerLink]="\'/home\'" [routerLinkActive]="\'active\'">Inicio</a>        </li>        <li class="nav-item">          <a class="nav-link" [routerLink]="\'/tools\'" [routerLinkActive]="\'active\'">Herramientas</a>        </li>        <li class="nav-item">          <a class="nav-link" [routerLink]="\'/users\'" [routerLinkActive]="\'active\'">Gestión de usuarios</a>        </li>      </ul>      <a href="/login" class="btn btn-primary" role="button">        {{authenticated ? \'Cerrar Sesión\': \'Iniciar Sesión\'}}      </a>    </div>  </div></nav></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ToolsComponent', 'selector': 'app-tools'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'WelcomeComponent', 'selector': 'app-welcome'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ToolsComponent', 'selector': 'app-tools'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'WelcomeComponent', 'selector': 'app-welcome'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavBarComponent'};
 </script>

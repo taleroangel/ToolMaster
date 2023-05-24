@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * Entidad encargada de configurar SpringSecurity
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthDetails implements UserDetails {

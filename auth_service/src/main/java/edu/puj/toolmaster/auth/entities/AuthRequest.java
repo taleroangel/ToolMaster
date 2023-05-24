@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Representa una solicitud de autenticación
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

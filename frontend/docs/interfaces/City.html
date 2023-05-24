@@ -145,6 +145,12 @@ servidor en formato JSON de una ciudad</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID de la ciudad</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -178,6 +184,12 @@ servidor en formato JSON de una ciudad</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Nombre de la ciudad</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -186,7 +198,14 @@ servidor en formato JSON de una ciudad</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface City {
+  /**
+   * ID de la ciudad
+   */
   id: number,
+
+  /**
+   * Nombre de la ciudad
+   */
   name: string
 }
 </code></pre>

@@ -5,11 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
+/**
+ * Repositorio encargado de hacer la conexión con la base de datos para obtener información de la tabla User
+ */
 public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByActiveTrue(Pageable pageable);
     Page<User> findAll(Specification<User> spec, Pageable pageable);

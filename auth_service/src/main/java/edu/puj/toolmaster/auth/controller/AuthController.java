@@ -13,9 +13,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlador REST de autenticación
+ */
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 
     @Autowired
@@ -24,12 +27,23 @@ public class AuthController {
     @Autowired
     private JwtSecurity jwt;
 
+    /**
+     * Verificar si está correctamente autenticado
+     *
+     * @return Siempre retorna éxito, el filtro de seguridad denegará la respuesta pues esta ruta está protegida
+     */
     @GetMapping("/check")
     public String check() {
-        return "Successfull authentication";
+        return "Successful authentication";
     }
 
 
+    /**
+     * Generar un token JWT mediante el login
+     *
+     * @param request petición de autenticación con nombre de usuario y contraseña
+     * @return Repuesta HTTP
+     */
     @PostMapping(value = "/login", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
         try {

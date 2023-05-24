@@ -221,8 +221,8 @@ el Backend con los JWT almacenados en cookies</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/app/services/auth.service.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/app/services/auth.service.ts:32</a></div>
                 </td>
             </tr>
 
@@ -345,8 +345,8 @@ el Backend con los JWT almacenados en cookies</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="55"
-                            class="link-to-prism">src/app/services/auth.service.ts:55</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/app/services/auth.service.ts:54</a></div>
                 </td>
             </tr>
 
@@ -386,7 +386,7 @@ el Backend con los JWT almacenados en cookies</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/services/auth.service.ts:70</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/services/auth.service.ts:69</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -408,7 +408,7 @@ el Backend con los JWT almacenados en cookies</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/services/auth.service.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/services/auth.service.ts:62</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -468,7 +468,7 @@ el Backend con los JWT almacenados en cookies</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/services/auth.service.ts:84</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/services/auth.service.ts:83</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -490,7 +490,7 @@ el Backend con los JWT almacenados en cookies</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/services/auth.service.ts:77</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/services/auth.service.ts:76</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -550,7 +550,7 @@ el Backend con los JWT almacenados en cookies</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/services/auth.service.ts:91</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/services/auth.service.ts:90</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -572,7 +572,7 @@ el Backend con los JWT almacenados en cookies</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, forwardRef } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { CookieService } from &#x27;ngx-cookie-service&#x27;;
 import { Token } from &#x27;../interfaces/token&#x27;;
@@ -587,15 +587,14 @@ import { Token } from &#x27;../interfaces/token&#x27;;
 export class AuthService {
 
   /**
-   * Constructor por defecto con inyección de dependencias
-   * @param http Cliente HTTP para las peticiones rest
-   * @param cookies Servicio de almacenamiento de cookies
-   */
+ * Constructor por defecto con inyección de dependencias
+ * @param http Cliente HTTP para las peticiones rest
+ * @param cookies Servicio de almacenamiento de cookies
+ */
   constructor(
-    private http: HttpClient,
-    private cookies: CookieService
+    protected http: HttpClient,
+    protected cookies: CookieService
   ) { }
-
 
   /**
    * Iniciar sesión en el backend y almacenar el Json Web Token (JWT)
@@ -626,7 +625,7 @@ export class AuthService {
   /**
    * Cerrar sesión eliminando las cookies almacenadas
    */
-  logout() {
+  logout(): void {
     this.cookies.delete(&#x27;token&#x27;)
     this.cookies.delete(&#x27;username&#x27;)
   }
@@ -634,28 +633,28 @@ export class AuthService {
   /**
    * Setter privado para establecer el nombre de usuario en una cookie
    */
-  private set username(username: string) {
+  protected set username(username: string) {
     this.cookies.set(&#x27;username&#x27;, username)
   }
 
   /**
    * Obtener el nombre de usuario, vacío si no hay usuario autenticado
    */
-  public get username(): string {
+  get username(): string {
     return this.cookies.get(&#x27;username&#x27;)
   }
 
   /**
    * Setter privado para establecer el token de autenticación
    */
-  private set token(token: string) {
+  protected set token(token: string) {
     this.cookies.set(&#x27;token&#x27;, token)
   }
 
   /**
    * Obtener el token JWT para la autenticación Bearer
    */
-  public get token(): string {
+  get token(): string {
     return this.cookies.get(&#x27;token&#x27;)
   }
 

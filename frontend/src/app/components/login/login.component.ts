@@ -72,7 +72,7 @@ export class LoginComponent {
    * Función mediante la cual se cierra sesión en caso de que el usuario esté
    * autenticado
    */
-  logOut(navigateToHome = false) {
+  logOut(navigateToHome: boolean = false) {
     this.authService.logout()
     alert("Sesión cerrada correctamente")
 

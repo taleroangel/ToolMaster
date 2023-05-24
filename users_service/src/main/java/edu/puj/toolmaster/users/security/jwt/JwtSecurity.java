@@ -5,6 +5,9 @@ import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * Clase que implementa la seguridad con JWT
+ */
 @Component
 public class JwtSecurity implements TokenValidator {
     @Value("${security.jwt.secret}")

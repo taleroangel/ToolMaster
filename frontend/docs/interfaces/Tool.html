@@ -116,6 +116,7 @@ servidor en formato JSON de una herramienta</p>
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#image" 
 >
                                             image
@@ -181,6 +182,12 @@ servidor en formato JSON de una herramienta</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Marca de la herramienta</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -214,6 +221,12 @@ servidor en formato JSON de una herramienta</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Ciudades en las que está disponible la herramienta</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -247,6 +260,12 @@ servidor en formato JSON de una herramienta</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Descripción de la herramienta</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -280,6 +299,12 @@ servidor en formato JSON de una herramienta</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID de la herramienta</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -309,10 +334,21 @@ servidor en formato JSON de una herramienta</p>
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Imagen opcional de la herramienta</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -346,6 +382,12 @@ servidor en formato JSON de una herramienta</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Nombre de la herramienta</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -379,6 +421,12 @@ servidor en formato JSON de una herramienta</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Precio de la herramienta</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -412,6 +460,12 @@ servidor en formato JSON de una herramienta</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Unidades disponibles de la herramienta</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -427,13 +481,44 @@ import { City } from &quot;./city&quot;
  * servidor en formato JSON de una herramienta
  */
 export interface Tool {
+  /**
+   * ID de la herramienta
+   */
   id: number
+
+  /**
+   * Nombre de la herramienta
+   */
   name: string
+
+  /**
+   * Marca de la herramienta
+   */
   brand: Brand
+
+  /**
+   * Descripción de la herramienta
+   */
   description: string
-  image: string
+
+  /**
+   * Imagen opcional de la herramienta
+   */
+  image?: string
+
+  /**
+   * Precio de la herramienta
+   */
   price: number
+
+  /**
+   * Ciudades en las que está disponible la herramienta
+   */
   cities: City[]
+
+  /**
+   * Unidades disponibles de la herramienta
+   */
   units: number
 }
 </code></pre>

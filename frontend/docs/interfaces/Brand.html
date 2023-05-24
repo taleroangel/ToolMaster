@@ -145,6 +145,12 @@ servidor en formato JSON de una marca</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID de la marca</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -178,6 +184,12 @@ servidor en formato JSON de una marca</p>
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Nombre de la marca</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -186,7 +198,14 @@ servidor en formato JSON de una marca</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Brand {
+  /**
+   * ID de la marca
+   */
   id: number,
+
+  /**
+   * Nombre de la marca
+   */
   name: string
 }
 </code></pre>
