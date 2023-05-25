@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">users_service</a> &gt; <a href="index.source.html" class="el_package">edu.puj.toolmaster.users.services</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package edu.puj.toolmaster.users.services;
+
+import edu.puj.toolmaster.users.entities.City;
+import edu.puj.toolmaster.users.entities.User;
+import edu.puj.toolmaster.users.entities.User_;
+import edu.puj.toolmaster.users.entities.auth.Auth;
+import edu.puj.toolmaster.users.persistance.AuthRepository;
+import edu.puj.toolmaster.users.persistance.CityRepository;
+import edu.puj.toolmaster.users.persistance.UserRepository;
+import edu.puj.toolmaster.users.exceptions.EntityAlreadyExistsException;
+import edu.puj.toolmaster.users.exceptions.ResourceBadRequestException;
+import edu.puj.toolmaster.users.exceptions.ResourceNotFoundException;
+import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+/**
+ * Servicio encargado de obtener los recursos del repositorio de usuarios
+ */
+@Service
+<span class="fc" id="L28">public class UserService {</span>
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
+    private AuthRepository authRepository;
+
+    /**
+     * Obtener todos los usuarios
+     *
+     * @param pageable Paginación
+     * @return Página de usuarios
+     */
+    public Page&lt;User&gt; getAllUsers(Pageable pageable) {
+<span class="fc" id="L46">        return userRepository.findAllByActiveTrue(pageable);</span>
+    }
+
+    /**
+     * Buscar usuarios con nombre que coincidan
+     *
+     * @param name     Nombre a buscar
+     * @param pageable Paginación
+     * @return Página de usuarios
+     */
+    public Page&lt;User&gt; userByNameLike(String name, Pageable pageable) {
+<span class="fc" id="L57">        String matchName = &quot;%&quot; + name + &quot;%&quot;;</span>
+<span class="pc" id="L58">        Specification&lt;User&gt; spec = Specification.where((root, query, cb) -&gt; cb.like(root.get(User_.name), matchName));</span>
+<span class="fc" id="L59">        return userRepository.findAll(spec, pageable);</span>
+    }
+
+    /**
+     * Obtener usuarios por su ID
+     *
+     * @param id ID del usuario
+     * @return Usuario encontrado
+     * @throws ResourceNotFoundException El usuario no fue encontrado
+     */
+    public User getUserById(Long id) throws ResourceNotFoundException {
+<span class="fc" id="L70">        return userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+    }
+
+    /**
+     * Obtener información completa de los usuarios
+     *
+     * @param user Usuario a completar
+     * @return Usuario completo
+     * @throws ResourceBadRequestException El usuario no tiene la información necesaria
+     */
+    public User parseUser(User user) throws ResourceBadRequestException {
+<span class="fc" id="L81">        return user.withCity(parseUserCity(user));</span>
+    }
+
+    /**
+     * Obtener la ciudad de un usuario completa
+     *
+     * @param user Usuario a completar
+     * @return Usuario con datos de la ciudad completos
+     * @throws ResourceBadRequestException No tenía ciudad
+     */
+    public City parseUserCity(User user) throws ResourceBadRequestException {
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        return user.getCity().getId() == null ? cityRepository.findByName(user.getCity().getName())</span>
+<span class="pc" id="L93">                                                        .orElseThrow(ResourceNotFoundException::new)</span>
+<span class="fc" id="L94">                       : cityRepository.findById(user.getCity().getId()).orElseGet(() -&gt; cityRepository.save(user.getCity()));</span>
+    }
+
+    /**
+     * Agregar un nuevo servicio
+     *
+     * @param user Usuario a ser agregado
+     * @return Usuario agregado
+     * @throws ResourceBadRequestException  El usuario está en un formato incorrecto
+     * @throws EntityAlreadyExistsException El usuario ya existía
+     */
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">    public User addNewUser(@NonNull User user) throws ResourceBadRequestException, EntityAlreadyExistsException {</span>
+        try {
+            // Get the parsed user
+<span class="fc" id="L108">            User fixedUser = parseUser(user);</span>
+
+            // Find if user already exists
+<span class="fc" id="L111">            Optional&lt;User&gt; findUser = userRepository.findOne(</span>
+<span class="fc" id="L112">                    Example.of(fixedUser, ExampleMatcher.matching()</span>
+<span class="fc" id="L113">                                                  .withIgnorePaths(&quot;id&quot;)));</span>
+
+<span class="fc bfc" id="L115" title="All 2 branches covered.">            if (findUser.isPresent()) {</span>
+<span class="fc" id="L116">                throw new EntityAlreadyExistsException(findUser.get());</span>
+            }
+
+            // Store it
+<span class="fc" id="L120">            User ruser = userRepository.save(fixedUser);</span>
+<span class="fc" id="L121">            authRepository.save(new Auth(ruser.getId(), ruser.getUsername(), ruser.getUsername()));</span>
+<span class="fc" id="L122">            return ruser;</span>
+
+<span class="fc" id="L124">        } catch (EntityAlreadyExistsException e) {</span>
+<span class="fc" id="L125">            throw e;</span>
+<span class="fc" id="L126">        } catch (Exception e) {</span>
+            // Throws null pointer exception if brand or city could not be created
+<span class="fc" id="L128">            throw new ResourceBadRequestException();</span>
+        }
+    }
+
+    /**
+     * Borrar un usuario dado su id
+     *
+     * @param id ID
+     * @throws ResourceNotFoundException el ID especificado no existe
+     */
+    public void deleteUserById(Long id) throws ResourceNotFoundException {
+<span class="fc" id="L139">        User user = userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+        // Logical Delete
+<span class="fc" id="L141">        user = user.withActive(Boolean.FALSE);</span>
+<span class="fc" id="L142">        authRepository.deleteById(user.getId());</span>
+<span class="fc" id="L143">        userRepository.save(user);</span>
+<span class="fc" id="L144">    }</span>
+
+    /**
+     * Actualizar un usuario dado su ID
+     *
+     * @param id   ID del usuario a actualizar
+     * @param user Usuario con datos actualizados
+     * @return Usuario con datos actualizados
+     * @throws ResourceBadRequestException El usuario estaba en un formato incorrecto
+     * @throws ResourceNotFoundException   El usuario no existía
+     */
+    public User updateUserById(Long id, User user) throws ResourceBadRequestException, ResourceNotFoundException {
+        try {
+            // Find already existing user
+<span class="fc" id="L158">            User findUser = userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+            // Parse the new user
+<span class="fc" id="L160">            User parsedUser = parseUser(user);</span>
+            // Save the changes (Create auth if it was deactivated)
+<span class="fc" id="L162">            User ruser = userRepository.save(parsedUser.withId(findUser.getId()));</span>
+<span class="pc bpc" id="L163" title="1 of 4 branches missed.">            if (!findUser.getActive() &amp;&amp; parsedUser.getActive()) {</span>
+<span class="fc" id="L164">                authRepository.save(new Auth(findUser.getId(), parsedUser.getUsername(), parsedUser.getUsername()));</span>
+            }
+<span class="fc" id="L166">            return ruser;</span>
+<span class="fc" id="L167">        } catch (Exception e) {</span>
+            // Throws null pointer exception if brand or city could not be created
+<span class="fc" id="L169">            throw new ResourceBadRequestException();</span>
+        }
+    }
+
+    /**
+     * Actualizar parcialmente un usuario (ignorar campos nulos)
+     *
+     * @param id   ID del usuario a actualizar
+     * @param user Usuario con información a actualizar (campos nulos permitidos)
+     * @return Usuario con la información completa
+     * @throws ResourceBadRequestException El usuario estaba en formato incorrecto
+     */
+    public User partialUserUpdateById(Long id, User user) throws ResourceBadRequestException {
+        try {
+            // Find already existing user
+<span class="fc" id="L184">            User findUser = userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+            // Build new user overriding old fields
+<span class="fc" id="L186">            User overrideUser = findUser.overrideWith(user);</span>
+            // Parse the new user
+<span class="fc bfc" id="L188" title="All 2 branches covered.">            if (user.getCity() != null) {</span>
+<span class="nc" id="L189">                overrideUser = overrideUser.withCity(parseUserCity(overrideUser));</span>
+            }
+<span class="fc" id="L191">            User ruser = userRepository.save(overrideUser);</span>
+<span class="pc bpc" id="L192" title="1 of 4 branches missed.">            if (!findUser.getActive() &amp;&amp; overrideUser.getActive()) {</span>
+<span class="fc" id="L193">                authRepository.save(new Auth(findUser.getId(), overrideUser.getUsername(), overrideUser.getUsername()));</span>
+            }
+            // Save the changes
+<span class="fc" id="L196">            return ruser;</span>
+<span class="fc" id="L197">        } catch (NullPointerException e) {</span>
+<span class="fc" id="L198">            throw e;</span>
+<span class="fc" id="L199">        } catch (Exception e) {</span>
+            // Throws null pointer exception if brand or city could not be created
+<span class="fc" id="L201">            throw new ResourceBadRequestException();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

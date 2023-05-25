@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">users_service</a> &gt; <a href="index.source.html" class="el_package">edu.puj.toolmaster.users.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package edu.puj.toolmaster.users.controller;
+
+import edu.puj.toolmaster.users.entities.User;
+import edu.puj.toolmaster.users.services.UserService;
+import edu.puj.toolmaster.users.exceptions.EntityAlreadyExistsException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * Controlador de usuarios
+ */
+@RestController
+@RequestMapping(&quot;/api/users&quot;)
+@CrossOrigin(origins = &quot;http://localhost:4200&quot;)
+<span class="fc" id="L21">public class UserController {</span>
+    @Autowired
+    UserService service;
+
+    /**
+     * Obtener todos los usuarios
+     * @param page Número de la página
+     * @param size Tamaño de la página
+     * @param sort Criterio de ordenamiento
+     * @return Respuesta json
+     */
+    @GetMapping(value = &quot;/&quot;, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Page&lt;User&gt; getAllUsers(@RequestParam(defaultValue = &quot;0&quot;) Integer page,
+                                  @RequestParam(defaultValue = &quot;10&quot;) Integer size,
+                                  @RequestParam(defaultValue = &quot;name&quot;) String sort) {
+<span class="fc" id="L36">        return service.getAllUsers(PageRequest.of(page, size, Sort.by(sort)));</span>
+    }
+
+    /**
+     * Obtener todos los usuarios por su nombre
+     * @param page Número de la página
+     * @param size Tamaño de la página
+     * @param sort Criterio de ordenamiento
+     * @param name Nombre del usuario
+     * @return Respuesta json
+     */
+    @GetMapping(value = &quot;/search/{name}&quot;, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Page&lt;User&gt; searchUsersByName(@RequestParam(defaultValue = &quot;0&quot;) Integer page,
+                                        @RequestParam(defaultValue = &quot;10&quot;) Integer size,
+                                        @RequestParam(defaultValue = &quot;name&quot;) String sort,
+                                        @PathVariable String name) {
+<span class="fc" id="L52">        return service.userByNameLike(name, PageRequest.of(page, size, Sort.by(sort)));</span>
+    }
+
+    /**
+     * Obtener un usuario por su ID
+     * @param id Id del usuario
+     * @return respuesta en JSON
+     */
+    @GetMapping(value = &quot;/id/{id}&quot;, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public User getUserById(@PathVariable Long id) {
+<span class="fc" id="L62">        return service.getUserById(id);</span>
+    }
+
+    /**
+     * Crear un nuevo usuario
+     * @param user Usuario nuevo
+     * @return Respuesta en JSON
+     */
+    @PostMapping(value = &quot;/&quot;, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity&lt;User&gt; createNewUser(@RequestBody User user) {
+        try {
+<span class="fc" id="L73">            return new ResponseEntity&lt;&gt;(service.addNewUser(user), HttpStatus.CREATED);</span>
+<span class="fc" id="L74">        } catch (EntityAlreadyExistsException e) {</span>
+            // Use Liskov Substitution principle to return a user from a DomainEntity
+<span class="fc" id="L76">            return new ResponseEntity&lt;&gt;((User) e.getResource(), HttpStatus.OK);</span>
+        }
+    }
+
+    /**
+     * Borrar un usuario por su ID
+     * @param id ID del usuario a borrar
+     */
+    @DeleteMapping(value = &quot;/{id}&quot;)
+    public void deleteUserById(@PathVariable Long id) {
+<span class="fc" id="L86">        service.deleteUserById(id);</span>
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * Actualizar un usuario por su ID
+     * @param id ID del usuario
+     * @param user usuario
+     * @return JSON con la respuesta
+     */
+    @PutMapping(value = &quot;/{id}&quot;, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public User updateUserById(@PathVariable Long id, @RequestBody User user) {
+<span class="fc" id="L97">        return service.updateUserById(id, user);</span>
+    }
+
+    /**
+     * Actualizar parcialmente un usuario por su id
+     * @param id ID del usuario
+     * @param user usuario
+     * @return JSON con la respuesta
+     */
+    @PatchMapping(value = &quot;/{id}&quot;, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public User partialUserUpdate(@PathVariable Long id, @RequestBody User user) {
+<span class="fc" id="L108">        return service.partialUserUpdateById(id, user);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

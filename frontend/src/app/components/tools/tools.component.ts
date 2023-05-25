@@ -186,6 +186,7 @@ export class ToolsComponent implements OnInit {
   sortBy(sort: ToolSort): void {
     this.currentSort = sort;
     this.fetchTools()
+    this.searchByBrand(this.brandFilter)
   }
 
   /**

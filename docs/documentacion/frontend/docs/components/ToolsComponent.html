@@ -1,0 +1,1637 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>toolmaster-frontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">toolmaster-frontend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ToolsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/tools/tools.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que muestra las cards con las diferentes herramientas</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-tools</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./tools.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./tools.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#brandFilter" >brandFilter</a>
+                            </li>
+                            <li>
+                                <a href="#brands" >brands</a>
+                            </li>
+                            <li>
+                                <a href="#currentPage" >currentPage</a>
+                            </li>
+                            <li>
+                                <a href="#currentSort" >currentSort</a>
+                            </li>
+                            <li>
+                                <a href="#isReady" >isReady</a>
+                            </li>
+                            <li>
+                                <a href="#pagination" >pagination</a>
+                            </li>
+                            <li>
+                                <a href="#searchName" >searchName</a>
+                            </li>
+                            <li>
+                                <a href="#tools" >tools</a>
+                            </li>
+                            <li>
+                                <a href="#TS" >TS</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#eraseTool" >eraseTool</a>
+                            </li>
+                            <li>
+                                <a href="#fetchBrands" >fetchBrands</a>
+                            </li>
+                            <li>
+                                <a href="#fetchTools" >fetchTools</a>
+                            </li>
+                            <li>
+                                <a href="#goNextPage" >goNextPage</a>
+                            </li>
+                            <li>
+                                <a href="#goPreviousPage" >goPreviousPage</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#searchByBrand" >searchByBrand</a>
+                            </li>
+                            <li>
+                                <a href="#searchByName" >searchByName</a>
+                            </li>
+                            <li>
+                                <a href="#sortBy" >sortBy</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#authenticated" >authenticated</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(toolService: <a href="../injectables/ToolService.html" target="_self">ToolService</a>, brandService: <a href="../injectables/BrandService.html" target="_self">BrandService</a>, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/tools/tools.component.ts:64</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor con los servicios inyectados</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>toolService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ToolService.html" target="_self" >ToolService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio de Herramientas</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>brandService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BrandService.html" target="_self" >BrandService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio de marcas</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio de autenticación</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eraseTool"></a>
+                    <span class="name">
+                        <span ><b>eraseTool</b></span>
+                        <a href="#eraseTool"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>eraseTool(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="215"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:215</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Borrar una herramienta por su ID</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>ID de la herramienta a borrar</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchBrands"></a>
+                    <span class="name">
+                        <span ><b>fetchBrands</b></span>
+                        <a href="#fetchBrands"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fetchBrands()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="119"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:119</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obtener un listado de todas las marcas</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchTools"></a>
+                    <span class="name">
+                        <span ><b>fetchTools</b></span>
+                        <a href="#fetchTools"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fetchTools()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:98</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obtener las herramientas utilizando las variables de ordenamiento y paginado</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goNextPage"></a>
+                    <span class="name">
+                        <span ><b>goNextPage</b></span>
+                        <a href="#goNextPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goNextPage()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="194"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:194</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cambiar la paginación a la siguiente página</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goPreviousPage"></a>
+                    <span class="name">
+                        <span ><b>goPreviousPage</b></span>
+                        <a href="#goPreviousPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goPreviousPage()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="204"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:204</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cambiar la paginación a la página anterior</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:82</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cargar contenido una vez se inicie la página</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchByBrand"></a>
+                    <span class="name">
+                        <span ><b>searchByBrand</b></span>
+                        <a href="#searchByBrand"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchByBrand(brand: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="159"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:159</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Buscar las herramientas cuya marca coincida o incluya la especificada</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>brand</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Marca por la cual filtrar=</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchByName"></a>
+                    <span class="name">
+                        <span ><b>searchByName</b></span>
+                        <a href="#searchByName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchByName()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:134</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Obtener las herramientas cuyo nombre coincida o incluya el especificado</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortBy"></a>
+                    <span class="name">
+                        <span ><b>sortBy</b></span>
+                        <a href="#sortBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sortBy(sort: <a href="../interfaces/Tool.html" target="_self">ToolSort</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="186"
+                            class="link-to-prism">src/app/components/tools/tools.component.ts:186</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cambiar el criterio de ordenamiento y realizar una nueva petición</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>sort</td>
+                                    <td>
+                                                <code><a href="../interfaces/Tool.html" target="_self" >ToolSort</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Criterio de ordenamiento</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="brandFilter"></a>
+                    <span class="name">
+                        <span ><b>brandFilter</b></span>
+                        <a href="#brandFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/tools/tools.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Variable para almacenar el filtro de marca actual,
+si está vacío no se aplica filtro</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="brands"></a>
+                    <span class="name">
+                        <span ><b>brands</b></span>
+                        <a href="#brands"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Brand.html" target="_self" >Brand[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/tools/tools.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Listado de las marcas para el filtro de marca</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentPage"></a>
+                    <span class="name">
+                        <span ><b>currentPage</b></span>
+                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/tools/tools.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Página actual para mostrar en la paginación</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentSort"></a>
+                    <span class="name">
+                        <span ><b>currentSort</b></span>
+                        <a href="#currentSort"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Tool.html" target="_self" >ToolSort</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ToolSort.NONE</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/tools/tools.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Criterio de ordenamiento actual</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isReady"></a>
+                    <span class="name">
+                        <span ><b>isReady</b></span>
+                        <a href="#isReady"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/tools/tools.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Variable que indica si está listo el contenido de la página</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pagination"></a>
+                    <span class="name">
+                        <span ><b>pagination</b></span>
+                        <a href="#pagination"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Pageable&lt;Tool&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/tools/tools.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Información sobre la paginación de herramientas para mostrar la página actual</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchName"></a>
+                    <span class="name">
+                        <span ><b>searchName</b></span>
+                        <a href="#searchName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/tools/tools.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Variable para almacenar el nombre de la herramienta buscar,
+está adjunta mediante un [ngModel] al input de búsqueda</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tools"></a>
+                    <span class="name">
+                        <span ><b>tools</b></span>
+                        <a href="#tools"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Tool.html" target="_self" >Tool[]</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/tools/tools.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Listado de las herramientas a mostrar</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TS"></a>
+                    <span class="name">
+                        <span ><b>TS</b></span>
+                        <a href="#TS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ToolSort</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/tools/tools.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Alias a ToolSort para uso dentro del html</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="authenticated"></a>
+                        <span class="name"><b>authenticated</b><a href="#authenticated"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>authenticated()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/components/tools/tools.component.ts:91</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Verificar si se está autenticado</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { ToolService, ToolSort } from &#x27;../../services/tool.service&#x27;;
+import { Pageable } from &#x27;src/app/interfaces/pageable&#x27;;
+import { Tool } from &#x27;src/app/models/tool&#x27;;
+import { AuthService } from &#x27;src/app/services/auth.service&#x27;;
+import { Brand } from &#x27;src/app/models/brand&#x27;;
+import { BrandService } from &#x27;src/app/services/brand.service&#x27;;
+
+/**
+ * Componente que muestra las cards con las diferentes herramientas
+ */
+@Component({
+  selector: &#x27;app-tools&#x27;,
+  templateUrl: &#x27;./tools.component.html&#x27;,
+  styleUrls: [&#x27;./tools.component.scss&#x27;]
+})
+export class ToolsComponent implements OnInit {
+
+  /**
+   * Alias a ToolSort para uso dentro del html
+   */
+  TS &#x3D; ToolSort;
+
+  /**
+   * Variable que indica si está listo el contenido de la página
+   */
+  isReady &#x3D; false;
+
+  /**
+   * Información sobre la paginación de herramientas para mostrar la página actual
+   */
+  pagination!: Pageable&lt;Tool&gt;;
+
+  /**
+   * Listado de las herramientas a mostrar
+   */
+  tools!: Tool[];
+
+  /**
+   * Listado de las marcas para el filtro de marca
+   */
+  brands: Brand[] &#x3D; [];
+
+  /**
+   * Página actual para mostrar en la paginación
+   */
+  currentPage: number &#x3D; 0;
+
+  /**
+  * Criterio de ordenamiento actual
+  */
+  currentSort: ToolSort &#x3D; ToolSort.NONE;
+
+  /**
+  * Variable para almacenar el nombre de la herramienta buscar,
+  * está adjunta mediante un [ngModel] al input de búsqueda
+  */
+  searchName: string &#x3D; &quot;&quot;;
+
+  /**
+   * Variable para almacenar el filtro de marca actual,
+   * si está vacío no se aplica filtro
+   */
+  brandFilter: string &#x3D; &quot;&quot;;
+
+  /**
+   * Constructor con los servicios inyectados
+   * @param toolService Servicio de Herramientas
+   * @param brandService Servicio de marcas
+   * @param authService Servicio de autenticación
+   */
+  constructor(
+    private toolService: ToolService,
+    private brandService: BrandService,
+    private authService: AuthService,
+  ) {
+  }
+
+  /**
+   * Cargar contenido una vez se inicie la página
+   */
+  ngOnInit(): void {
+    this.fetchTools()
+    this.fetchBrands()
+  }
+
+  /**
+   * Verificar si se está autenticado
+   * @returns True si está autenticado
+   */
+  get authenticated(): boolean {
+    return this.authService.authenticated
+  }
+
+  /**
+   * Obtener las herramientas utilizando las variables de ordenamiento y paginado
+   */
+  fetchTools(): Promise&lt;boolean&gt; {
+    return new Promise&lt;boolean&gt;((resolve, _) &#x3D;&gt; {
+      this.toolService.searchAllTools(this.currentSort, this.currentPage).subscribe({
+        next: data &#x3D;&gt; {
+          this.pagination &#x3D; data;
+          this.tools &#x3D; data.content;
+          this.isReady &#x3D; true;
+          resolve(true)
+        },
+        error: error &#x3D;&gt; {
+          console.error(error);
+          alert(&quot;Error!, No se ha podido conectar con el servidor&quot;)
+          resolve(false)
+        }
+      })
+    });
+  }
+
+  /**
+   * Obtener un listado de todas las marcas
+   */
+  fetchBrands(): void {
+    this.brandService.fetchBrands().subscribe({
+      next: data &#x3D;&gt; {
+        this.brands &#x3D; data;
+      },
+      error: error &#x3D;&gt; {
+        console.error(error);
+        alert(&quot;Error!, No se ha podido conectar con el servidor&quot;)
+      }
+    })
+  }
+
+  /**
+   * Obtener las herramientas cuyo nombre coincida o incluya el especificado
+   */
+  searchByName(): boolean {
+    if (this.searchName.length &#x3D;&#x3D; 0) {
+      this.fetchTools()
+      return false
+    } else {
+      this.toolService.searchByName(this.searchName, this.currentSort, this.currentPage).subscribe({
+        next: data &#x3D;&gt; {
+          this.pagination &#x3D; data;
+          this.tools &#x3D; data.content;
+          this.isReady &#x3D; true;
+        },
+        error: error &#x3D;&gt; {
+          console.error(error);
+          alert(&quot;Error!, No se ha podido conectar con el servidor&quot;)
+        }
+      })
+
+      return true
+    }
+  }
+
+  /**
+   * Buscar las herramientas cuya marca coincida o incluya la especificada
+   * @param brand Marca por la cual filtrar&#x3D;
+   */
+  searchByBrand(brand: string): boolean {
+    this.brandFilter &#x3D; brand
+
+    if (this.brandFilter.length &#x3D;&#x3D; 0) {
+      this.fetchTools()
+      return false
+
+    } else {
+      this.toolService.searchByBrand(this.brandFilter, this.currentSort, this.currentPage).subscribe({
+        next: data &#x3D;&gt; {
+          this.pagination &#x3D; data;
+          this.tools &#x3D; data.content;
+        },
+        error: error &#x3D;&gt; {
+          console.error(error);
+          alert(&quot;Error!, No se ha podido conectar con el servidor&quot;)
+        }
+      })
+      return true
+
+    }
+  }
+
+  /**
+   * Cambiar el criterio de ordenamiento y realizar una nueva petición
+   * @param sort Criterio de ordenamiento
+   */
+  sortBy(sort: ToolSort): void {
+    this.currentSort &#x3D; sort;
+    this.fetchTools()
+  }
+
+  /**
+   * Cambiar la paginación a la siguiente página
+   */
+  goNextPage(): void {
+    if (!this.pagination.last) {
+      this.currentPage +&#x3D; 1
+      this.fetchTools()
+    }
+  }
+
+  /**
+   * Cambiar la paginación a la página anterior
+   */
+  goPreviousPage(): void {
+    if (!this.pagination.first) {
+      this.currentPage -&#x3D; 1
+      this.fetchTools()
+    }
+  }
+
+  /**
+   * Borrar una herramienta por su ID
+   * @param id ID de la herramienta a borrar
+   */
+  eraseTool(id: number) {
+    this.toolService.eraseToolById(id).subscribe({
+      next: () &#x3D;&gt; {
+        alert(&quot;Borrado correctamente!&quot;)
+        this.fetchTools()
+      },
+      error: () &#x3D;&gt; {
+        alert(&quot;Ha ocurrido un error!&quot;)
+      }
+    })
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngIf&#x3D;&quot;isReady; then content; else loading&quot;&gt;
+&lt;/ng-container&gt;
+
+&lt;ng-template #loading&gt;
+  &lt;div class&#x3D;&quot;loading&quot;&gt;
+    &lt;div class&#x3D;&quot;spinner-border&quot; role&#x3D;&quot;status&quot;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/ng-template&gt;
+
+&lt;ng-template #content&gt;
+  &lt;div class&#x3D;&quot;header&quot;&gt;
+    &lt;img src&#x3D;&quot;assets/images/hardware.png&quot; alt&#x3D;&quot;&quot; srcset&#x3D;&quot;&quot;&gt;
+    &lt;div class&#x3D;&quot;content&quot;&gt;
+      &lt;h1 class&#x3D;&quot;title&quot;&gt;Listado de Herramientas&lt;/h1&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;d-flex align-items-center justify-content-center gap-3&quot;&gt;
+    &lt;!-- Marcas --&gt;
+    &lt;div class&#x3D;&quot;dropdown&quot; *ngIf&#x3D;&quot;brands.length !&#x3D; 0&quot;&gt;
+      &lt;button class&#x3D;&quot;btn btn-primary dropdown-toggle&quot; type&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;dropdown&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
+        {{brandFilter.length &#x3D;&#x3D; 0 ? &#x27;Seleccionar Marca&#x27;: brandFilter}}
+      &lt;/button&gt;
+      &lt;ul class&#x3D;&quot;dropdown-menu&quot;&gt;
+        &lt;li&gt;&lt;button (click)&#x3D;&quot;searchByBrand(&#x27;&#x27;)&quot; class&#x3D;&quot;dropdown-item&quot; [class.active]&#x3D;&quot;brandFilter.length &#x3D;&#x3D; 0&quot;&gt;Todas las
+            marcas&lt;/button&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;button (click)&#x3D;&quot;searchByBrand(brand.name)&quot; class&#x3D;&quot;dropdown-item&quot; *ngFor&#x3D;&quot;let brand of brands&quot;
+            [class.active]&#x3D;&quot;brandFilter &#x3D;&#x3D; brand.name&quot;&gt;{{brand.name}}&lt;/button&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;!-- Filtros --&gt;
+    &lt;div class&#x3D;&quot;dropdown&quot;&gt;
+      &lt;button class&#x3D;&quot;btn btn-secondary dropdown-toggle&quot; type&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;dropdown&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
+        Ordenar Por
+      &lt;/button&gt;
+      &lt;ul class&#x3D;&quot;dropdown-menu&quot;&gt;
+        &lt;li&gt;&lt;a class&#x3D;&quot;dropdown-item&quot; [class.active]&#x3D;&quot;currentSort &#x3D;&#x3D; TS.NONE&quot; (click)&#x3D;&quot;sortBy(TS.NONE)&quot;&gt;No Ordenar&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a class&#x3D;&quot;dropdown-item&quot; [class.active]&#x3D;&quot;currentSort &#x3D;&#x3D; TS.PRICE&quot; (click)&#x3D;&quot;sortBy(TS.PRICE)&quot;&gt;Precio&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class&#x3D;&quot;dropdown-item&quot; [class.active]&#x3D;&quot;currentSort &#x3D;&#x3D; TS.NAME&quot; (click)&#x3D;&quot;sortBy(TS.NAME)&quot;&gt;Nombre&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class&#x3D;&quot;dropdown-item&quot; [class.active]&#x3D;&quot;currentSort &#x3D;&#x3D; TS.BRAND&quot; (click)&#x3D;&quot;sortBy(TS.BRAND)&quot;&gt;Marca&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class&#x3D;&quot;dropdown-item&quot; [class.active]&#x3D;&quot;currentSort &#x3D;&#x3D; TS.CITY&quot; (click)&#x3D;&quot;sortBy(TS.CITY)&quot;&gt;Ciudad&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;!-- Paginación --&gt;
+    &lt;nav class&#x3D;&quot;mt-3&quot;&gt;
+      &lt;ul class&#x3D;&quot;pagination&quot;&gt;
+        &lt;li class&#x3D;&quot;page-item&quot;&gt;&lt;a class&#x3D;&quot;page-link&quot; [class.disabled-link]&#x3D;&quot;pagination.first&quot;
+            (click)&#x3D;&quot;goPreviousPage()&quot;&gt;Anterior&lt;/a&gt;&lt;/li&gt;
+        &lt;li class&#x3D;&quot;page-item&quot;&gt;&lt;b class&#x3D;&quot;page-link&quot;&gt;{{pagination.number}}&lt;/b&gt;&lt;/li&gt;
+        &lt;li class&#x3D;&quot; page-item&quot;&gt;&lt;a class&#x3D;&quot;page-link&quot; [class.disabled-link]&#x3D;&quot;pagination.last&quot;
+            (click)&#x3D;&quot;goNextPage()&quot;&gt;Siguiente&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+    &lt;!-- Búsqueda --&gt;
+    &lt;form class&#x3D;&quot;d-flex&quot; role&#x3D;&quot;search&quot; (ngSubmit)&#x3D;&quot;searchByName()&quot;&gt;
+      &lt;input class&#x3D;&quot;form-control me-2&quot; type&#x3D;&quot;search&quot; placeholder&#x3D;&quot;Nombre del Producto&quot; aria-label&#x3D;&quot;Nombre del Producto&quot;
+        name&#x3D;&quot;searchName&quot; [(ngModel)]&#x3D;&quot;searchName&quot;&gt;
+      &lt;button class&#x3D;&quot;btn btn-outline-primary&quot; type&#x3D;&quot;submit&quot;&gt;Buscar&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+
+  &lt;div *ngIf&#x3D;&quot;tools.length &#x3D;&#x3D; 0&quot;&gt;
+    &lt;h3 class&#x3D;&quot;text-center&quot;&gt;No hay resultados que coincidan con el criterio...&lt;/h3&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Mostrar Herramientas --&gt;
+  &lt;section class&#x3D;&quot;tools-section h-100&quot; *ngIf&#x3D;&quot;tools.length !&#x3D; 0&quot;&gt;
+    &lt;div class&#x3D;&quot;tools-grid row&quot;&gt;
+      &lt;div class&#x3D;&quot;col-sm-3&quot; *ngFor&#x3D;&quot;let tool of tools&quot;&gt;
+        &lt;div class&#x3D;&quot;card text-black tool-card&quot;&gt;
+          &lt;img [src]&#x3D;&quot;tool.image&quot; class&#x3D;&quot;card-img-top&quot; [alt]&#x3D;&quot;tool.name&quot; /&gt;
+          &lt;div class&#x3D;&quot;card-body&quot;&gt;
+            &lt;div class&#x3D;&quot;text-center&quot;&gt;
+              &lt;h5 class&#x3D;&quot;card-title&quot;&gt;{{tool.name}}&lt;/h5&gt;
+              &lt;p class&#x3D;&quot;text-muted mb-4&quot;&gt;{{tool.description}}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;table class&#x3D;&quot;table table-bordered&quot;&gt;
+              &lt;tr&gt;
+                &lt;th&gt;Marca&lt;/th&gt;
+                &lt;td&gt;{{tool.brand.name}}&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;th&gt;Unidades:&lt;/th&gt;
+                &lt;td&gt;{{tool.units}}&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;th&gt;Ciudades:&lt;/th&gt;
+                &lt;td&gt;
+                  &lt;ul class&#x3D;&quot;list-group&quot;&gt;
+                    &lt;li class&#x3D;&quot;list-group-item&quot; *ngFor&#x3D;&quot;let city of tool.cities&quot;&gt;{{city.name}}&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;th&gt;Precio:&lt;/th&gt;
+                &lt;td&gt;${{tool.price}}&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;div class&#x3D;&quot;d-flex align-items-center justify-content-center gap-3&quot;&gt;
+              &lt;a (click)&#x3D;&quot;eraseTool(tool.id)&quot; class&#x3D;&quot;btn btn-danger&quot; *ngIf&#x3D;&quot;authenticated&quot;&gt;&lt;i
+                  class&#x3D;&quot;bi bi-trash-fill&quot;&gt;&lt;/i&gt;&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/ng-template&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./tools.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.header {
+  height: 8em;
+}
+
+.tools-section {
+  margin: 20px;
+}
+
+.tools-grid {
+  padding: 20px;
+}
+
+.tool-card {
+  img {
+    margin: 20px;
+    width: 90%;
+  }
+}
+
+.disabled-link {
+  color: grey;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="isReady; then content; else loading"></ng-container><ng-template #loading>  <div class="loading">    <div class="spinner-border" role="status">    </div>  </div></ng-template><ng-template #content>  <div class="header">    <img src="assets/images/hardware.png" alt="" srcset="">    <div class="content">      <h1 class="title">Listado de Herramientas</h1>    </div>  </div>  <div class="d-flex align-items-center justify-content-center gap-3">    <!-- Marcas -->    <div class="dropdown" *ngIf="brands.length != 0">      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">        {{brandFilter.length == 0 ? \'Seleccionar Marca\': brandFilter}}      </button>      <ul class="dropdown-menu">        <li><button (click)="searchByBrand(\'\')" class="dropdown-item" [class.active]="brandFilter.length == 0">Todas las            marcas</button></li>        <li><button (click)="searchByBrand(brand.name)" class="dropdown-item" *ngFor="let brand of brands"            [class.active]="brandFilter == brand.name">{{brand.name}}</button></li>      </ul>    </div>    <!-- Filtros -->    <div class="dropdown">      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">        Ordenar Por      </button>      <ul class="dropdown-menu">        <li><a class="dropdown-item" [class.active]="currentSort == TS.NONE" (click)="sortBy(TS.NONE)">No Ordenar</a>        </li>        <li><a class="dropdown-item" [class.active]="currentSort == TS.PRICE" (click)="sortBy(TS.PRICE)">Precio</a></li>        <li><a class="dropdown-item" [class.active]="currentSort == TS.NAME" (click)="sortBy(TS.NAME)">Nombre</a></li>        <li><a class="dropdown-item" [class.active]="currentSort == TS.BRAND" (click)="sortBy(TS.BRAND)">Marca</a></li>        <li><a class="dropdown-item" [class.active]="currentSort == TS.CITY" (click)="sortBy(TS.CITY)">Ciudad</a></li>      </ul>    </div>    <!-- Paginación -->    <nav class="mt-3">      <ul class="pagination">        <li class="page-item"><a class="page-link" [class.disabled-link]="pagination.first"            (click)="goPreviousPage()">Anterior</a></li>        <li class="page-item"><b class="page-link">{{pagination.number}}</b></li>        <li class=" page-item"><a class="page-link" [class.disabled-link]="pagination.last"            (click)="goNextPage()">Siguiente</a></li>      </ul>    </nav>    <!-- Búsqueda -->    <form class="d-flex" role="search" (ngSubmit)="searchByName()">      <input class="form-control me-2" type="search" placeholder="Nombre del Producto" aria-label="Nombre del Producto"        name="searchName" [(ngModel)]="searchName">      <button class="btn btn-outline-primary" type="submit">Buscar</button>    </form>  </div>  <div *ngIf="tools.length == 0">    <h3 class="text-center">No hay resultados que coincidan con el criterio...</h3>  </div>  <!-- Mostrar Herramientas -->  <section class="tools-section h-100" *ngIf="tools.length != 0">    <div class="tools-grid row">      <div class="col-sm-3" *ngFor="let tool of tools">        <div class="card text-black tool-card">          <img [src]="tool.image" class="card-img-top" [alt]="tool.name" />          <div class="card-body">            <div class="text-center">              <h5 class="card-title">{{tool.name}}</h5>              <p class="text-muted mb-4">{{tool.description}}</p>            </div>            <table class="table table-bordered">              <tr>                <th>Marca</th>                <td>{{tool.brand.name}}</td>              </tr>              <tr>                <th>Unidades:</th>                <td>{{tool.units}}</td>              </tr>              <tr>                <th>Ciudades:</th>                <td>                  <ul class="list-group">                    <li class="list-group-item" *ngFor="let city of tool.cities">{{city.name}}</li>                  </ul>                </td>              </tr>              <tr>                <th>Precio:</th>                <td>${{tool.price}}</td>              </tr>            </table>            <div class="d-flex align-items-center justify-content-center gap-3">              <a (click)="eraseTool(tool.id)" class="btn btn-danger" *ngIf="authenticated"><i                  class="bi bi-trash-fill"></i></a>            </div>          </div>        </div>      </div>    </div>  </section></ng-template></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ToolsComponent', 'selector': 'app-tools'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'WelcomeComponent', 'selector': 'app-welcome'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ToolsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ToolsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

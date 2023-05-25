@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ToolService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tools_service</a> &gt; <a href="index.source.html" class="el_package">edu.puj.toolmaster.tools.services</a> &gt; <span class="el_source">ToolService.java</span></div><h1>ToolService.java</h1><pre class="source lang-java linenums">package edu.puj.toolmaster.tools.services;
+
+import edu.puj.toolmaster.tools.entities.*;
+import edu.puj.toolmaster.tools.persistance.BrandRepository;
+import edu.puj.toolmaster.tools.persistance.CityRepository;
+import edu.puj.toolmaster.tools.persistance.ToolRepository;
+import edu.puj.toolmaster.tools.exceptions.EntityAlreadyExistsException;
+import edu.puj.toolmaster.tools.exceptions.ResourceBadRequestException;
+import edu.puj.toolmaster.tools.exceptions.ResourceNotFoundException;
+import jakarta.persistence.criteria.*;
+import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Interacts with database to retrieve Tools data achieving Single Responsibility
+ */
+@Service
+<span class="fc" id="L25">public class ToolService {</span>
+
+    @Autowired
+    ToolRepository toolRepository;
+
+    @Autowired
+    BrandRepository brandRepository;
+
+    @Autowired
+    CityRepository cityRepository;
+
+    /**
+     * Get a paged list of all tools
+     *
+     * @param pageable pages
+     * @return Page with tools
+     */
+    public Page&lt;Tool&gt; getAllTools(Pageable pageable) {
+<span class="fc" id="L43">        return toolRepository.findAll(pageable);</span>
+    }
+
+    /**
+     * Obtener las herramientas cuyo nombre coincida o contenga el especificado
+     *
+     * @param name     Nombre de la herramientas
+     * @param pageable Criterio de paginación
+     * @return Herramientas paginadas
+     */
+    public Page&lt;Tool&gt; toolByNameLike(String name, Pageable pageable) {
+<span class="fc" id="L54">        String matchName = &quot;%&quot; + name + &quot;%&quot;;</span>
+<span class="pc" id="L55">        Specification&lt;Tool&gt; spec = Specification.where((root, query, cb) -&gt; cb.like(root.get(Tool_.name), matchName));</span>
+<span class="fc" id="L56">        return toolRepository.findAll(spec, pageable);</span>
+    }
+
+    /**
+     * Obtener las herramientas que tengan una marca cuyo nombre coincida o contenga el especificado
+     *
+     * @param brand    Nombre de la marca
+     * @param pageable Criterio de paginación
+     * @return Herramientas paginadas
+     */
+    public Page&lt;Tool&gt; toolByBrand(String brand, Pageable pageable) {
+<span class="fc" id="L67">        Specification&lt;Tool&gt; spec = Specification.where((root, query, cb) -&gt; {</span>
+<span class="nc" id="L68">            Join&lt;Tool, Brand&gt; brandJoin = root.join(Tool_.brand, JoinType.LEFT);</span>
+<span class="nc" id="L69">            return cb.like(brandJoin.get(Brand_.name), brand);</span>
+        });
+<span class="fc" id="L71">        return toolRepository.findAll(spec, pageable);</span>
+    }
+
+
+    /**
+     * Get a tool by its id
+     *
+     * @param id ID to search
+     * @return Fetched tool
+     * @throws ResourceNotFoundException Tool doesn't exist
+     */
+    public Tool getToolById(Integer id) throws ResourceNotFoundException {
+<span class="fc" id="L83">        return toolRepository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+    }
+
+    /**
+     * Parse tool to parse cities and brand names
+     *
+     * @param tool Tool to parse
+     * @return Parsed tool
+     * @throws ResourceBadRequestException cities or brand had invalid values
+     * @see edu.puj.toolmaster.tools.services.ToolService#parseToolBrand
+     * @see edu.puj.toolmaster.tools.services.ToolService#parseToolCities
+     */
+    public Tool parseTool(Tool tool) throws ResourceBadRequestException {
+<span class="fc" id="L96">        return tool.withBrand(parseToolBrand(tool)).withCities(parseToolCities(tool));</span>
+    }
+
+    /**
+     * Parse tools brands with either name or id
+     *
+     * @param tool Tool with brand
+     * @return Parsed Brand
+     */
+    public Brand parseToolBrand(Tool tool) {
+<span class="fc" id="L106">        return</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">                ((tool.getBrand().getId() == null ?</span>
+<span class="fc" id="L108">                          brandRepository.findByName(tool.getBrand().getName()) :</span>
+<span class="fc" id="L109">                          brandRepository.findById(tool.getBrand().getId()))</span>
+<span class="fc" id="L110">                ).orElseGet(</span>
+<span class="fc" id="L111">                        () -&gt; brandRepository.save(tool.getBrand())</span>
+                );
+    }
+
+    /**
+     * Parse tool cities from either name or id
+     *
+     * @param tool Tool with cities
+     * @return List of parsed cities
+     */
+    public List&lt;City&gt; parseToolCities(Tool tool) throws ResourceBadRequestException {
+<span class="fc" id="L122">        return tool.getCities().stream().map(</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">                        e -&gt; (e.getId() == null ?</span>
+<span class="fc" id="L124">                                      cityRepository.findByName(e.getName())</span>
+<span class="fc" id="L125">                                      : cityRepository.findById(e.getId())</span>
+<span class="fc" id="L126">                        ).orElseGet(() -&gt; cityRepository.save(e)))</span>
+<span class="fc" id="L127">                       .toList();</span>
+    }
+
+    /**
+     * Add a new tool to the database
+     * {@link edu.puj.toolmaster.tools.entities.Brand} and {@link edu.puj.toolmaster.tools.entities.City}
+     * can be either specify an ID or a name, if record doesn't exist it will be created using name
+     *
+     * @param tool New tool to be added
+     * @return Tool added or null if not a valid tool
+     * @throws ResourceBadRequestException  Bad resource description
+     * @throws EntityAlreadyExistsException The entity could not be added because it already exists
+     */
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">    public Tool addNewTool(@NonNull Tool tool) throws ResourceBadRequestException, EntityAlreadyExistsException {</span>
+        try {
+            // Get the parsed tool
+<span class="fc" id="L143">            Tool fixedTool = parseTool(tool);</span>
+
+            // Find if tool already exists
+<span class="fc" id="L146">            Optional&lt;Tool&gt; findTool = toolRepository.findOne(</span>
+<span class="fc" id="L147">                    Example.of(fixedTool, ExampleMatcher.matching()</span>
+<span class="fc" id="L148">                                                  .withIgnorePaths(&quot;id&quot;)));</span>
+
+<span class="fc bfc" id="L150" title="All 2 branches covered.">            if (findTool.isPresent()) {</span>
+<span class="fc" id="L151">                throw new EntityAlreadyExistsException(findTool.get());</span>
+            }
+
+            // Store it
+<span class="fc" id="L155">            return toolRepository.save(fixedTool);</span>
+
+<span class="fc" id="L157">        } catch (EntityAlreadyExistsException e) {</span>
+<span class="fc" id="L158">            throw e;</span>
+<span class="fc" id="L159">        } catch (Exception e) {</span>
+            // Throws null pointer exception if brand or city could not be created
+<span class="fc" id="L161">            throw new ResourceBadRequestException();</span>
+        }
+    }
+
+    /**
+     * Delete a tool by it's id
+     *
+     * @param id ID of the tool to be deleted
+     * @throws ResourceNotFoundException Resource doesn't exist
+     */
+    public void deleteToolById(Integer id) throws ResourceNotFoundException {
+<span class="fc" id="L172">        toolRepository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+<span class="fc" id="L173">        toolRepository.deleteById(id);</span>
+<span class="fc" id="L174">    }</span>
+
+    /**
+     * Update a tool by it's ID
+     *
+     * @param id   ID of the tool to be updated
+     * @param tool Tool with non-null fields
+     * @return Updated tool
+     * @throws ResourceBadRequestException Tool had null fields or parsing failed
+     */
+    public Tool updateToolById(Integer id, Tool tool) throws ResourceBadRequestException {
+        try {
+            // Find already existing tool
+<span class="fc" id="L187">            Tool findTool = toolRepository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+            // Parse the new tool
+<span class="fc" id="L189">            Tool parsedTool = parseTool(tool);</span>
+            // Save the changes
+<span class="fc" id="L191">            return toolRepository.save(parsedTool.withId(findTool.getId()));</span>
+<span class="fc" id="L192">        } catch (ResourceNotFoundException e) {</span>
+<span class="fc" id="L193">            throw e;</span>
+<span class="fc" id="L194">        } catch (Exception e) {</span>
+            // Throws null pointer exception if brand or city could not be created
+<span class="fc" id="L196">            throw new ResourceBadRequestException();</span>
+        }
+    }
+
+    public Tool partialToolUpdateById(Integer id, Tool tool) throws ResourceBadRequestException {
+        try {
+            // Find already existing tool
+<span class="fc" id="L203">            Tool findTool = toolRepository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+            // Build new tool overriding old fields
+<span class="fc" id="L205">            Tool overrideTool = findTool.overrideWith(tool);</span>
+            // Parse the new tool
+<span class="pc bpc" id="L207" title="1 of 2 branches missed.">            if (tool.getCities() != null) {</span>
+<span class="fc" id="L208">                overrideTool = overrideTool.withCities(parseToolCities(overrideTool));</span>
+            }
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">            if (tool.getBrand() != null) {</span>
+<span class="fc" id="L211">                overrideTool = overrideTool.withBrand(parseToolBrand(overrideTool));</span>
+            }
+            // Save the changes
+<span class="fc" id="L214">            return toolRepository.save(overrideTool);</span>
+<span class="fc" id="L215">        } catch (Exception e) {</span>
+            // Throws null pointer exception if brand or city could not be created
+<span class="fc" id="L217">            throw new ResourceBadRequestException();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

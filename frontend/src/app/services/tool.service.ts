@@ -27,7 +27,7 @@ export class ToolService {
    * @returns Observable de rxjs con la petición
    */
   searchAllTools(sort: ToolSort = ToolSort.NONE, page: number = 0): Observable<Pageable<Tool>> {
-    const params = new HttpParams().set('sort', sort).set('page', page);
+    const params = new HttpParams().set('sort', sort).set('page', page).set('size', 2);
     return this.http.get<Pageable<Tool>>("http://localhost:8081/api/tools/", { params: params })
   }
 
